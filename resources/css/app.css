@@ -1,0 +1,21 @@
+@import 'tailwindcss';
+
+@theme {
+    /* 1. Mengatur Font Default ke Poppins */
+    --font-sans: 'Poppins', ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+    /* 2. Mendaftarkan Warna Kustom */
+    /* Ini pengganti tailwind.config.js bagian extend colors */
+
+    /* Background sangat gelap (#0B0F19) */
+    --color-dark-bg: #0B0F19;
+
+    /* Background kartu/section (#111827) */
+    --color-card-bg: #111827;
+
+    /* Warna aksen oranye utama (#FF6B4A) */
+    --color-primary: #FF6B4A;
+    
+    /* Warna aksen oranye sekunder (#FFA07A) */
+    --color-secondary: #FFA07A;
+}
