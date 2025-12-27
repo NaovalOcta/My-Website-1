@@ -15,7 +15,80 @@
 
     /* Warna aksen oranye utama (#FF6B4A) */
     --color-primary: #FF6B4A;
-    
+
     /* Warna aksen oranye sekunder (#FFA07A) */
     --color-secondary: #FFA07A;
+}
+
+/* --- ANIMASI --- */
+
+/* 1. Efek Melayang (Float) */
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+
+/* 2. Fade In Up (Untuk Hero) */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* 3. Scroll Reveal (Untuk Section Lain) */
+.reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 1s ease-out;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 4. Skill Bar Animation */
+/* Saat parent .reveal aktif, bar anak akan animasi lebarnya */
+.reveal.active .skill-bar-fill {
+    animation: fillBar 1.5s ease-out forwards;
+}
+
+@keyframes fillBar {
+    from {
+        width: 0%;
+    }
+}
+
+/* 5. Typing Cursor */
+.typing-cursor::after {
+    content: '|';
+    animation: blink 1s step-start infinite;
+    color: var(--color-primary);
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
 }
