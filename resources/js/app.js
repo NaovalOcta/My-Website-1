@@ -1,7 +1,5 @@
 import "./bootstrap";
 
-import "./bootstrap";
-
 // 1. Scroll Reveal Animation
 const revealElements = document.querySelectorAll(".reveal");
 
@@ -23,7 +21,11 @@ revealOnScroll(); // Panggil saat load
 // 2. Typing Effect Logic (FIXED)
 const textElement = document.getElementById("typing-text");
 if (textElement) {
-    const words = ["Frontend Developer", "Backend Developer", "Tech Enthusiast"];
+    const words = [
+        "Frontend Developer",
+        "Backend Developer",
+        "Tech Enthusiast",
+    ];
     let wordIndex = 0;
     let charIndex = 0;
     let isDeleting = false;

@@ -1,6 +1,13 @@
 import { defineConfig } from "vite";
 import laravel from "laravel-vite-plugin";
 import tailwindcss from "@tailwindcss/vite";
+import fs from "fs"; // <--- Import file system module bawaan Node.js
+
+// Sesuaikan path ini dengan lokasi instalasi Laragon Anda
+// Perhatikan penggunaan garis miring (/) bukan backslash (\) agar aman
+const host = "naoval-octa.test";
+const certPath = "C:/laragon/etc/ssl/laragon.crt";
+const keyPath = "C:/laragon/etc/ssl/laragon.key";
 
 export default defineConfig({
     plugins: [
@@ -8,10 +15,15 @@ export default defineConfig({
             input: ["resources/css/app.css", "resources/js/app.js"],
             refresh: true,
         }),
-        tailwindcss(),  
+        tailwindcss(),
     ],
     server: {
-        host: "127.0.0.1", // <--- TAMBAHKAN BARIS INI (Wajib untuk Windows)
+        host: host,
+        hmr: { host: host }, // Hot Module Replacement ikut domain
+        https: {
+            key: fs.readFileSync(keyPath),
+            cert: fs.readFileSync(certPath),
+        },
         watch: {
             ignored: ["**/storage/framework/views/**"],
         },
