@@ -71,10 +71,15 @@
                 <img src="https://ui-avatars.com/api/?name=Admin&background=FF6B4A&color=fff" alt="Admin"
                     class="w-9 h-9 rounded-full">
                 <div class="flex-1 min-w-0">
-                    <p class="text-sm font-medium text-white truncate">Super Admin</p>
-                    <p class="text-xs text-gray-500 truncate">admin@naoval.dev</p>
+                    <p class="text-sm font-medium text-white truncate">{{ Auth::user()->name ?? 'Admin' }}</p>
+                    <p class="text-xs text-gray-500 truncate">{{ Auth::user()->email ?? '' }}</p>
                 </div>
-                <button class="text-gray-400 hover:text-red-500 transition"><i class="fas fa-sign-out-alt"></i></button>
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="text-gray-400 hover:text-red-500 transition" title="Logout">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </form>
             </div>
         </div>
     </aside>

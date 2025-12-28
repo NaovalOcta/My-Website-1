@@ -49,6 +49,9 @@
                             class="w-full bg-dark-bg border border-gray-700 text-white text-sm rounded-xl pl-11 pr-4 py-3 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors placeholder-gray-600"
                             placeholder="admin@naoval.dev">
                     </div>
+                    @error('email')
+                        <p class="text-red-500 text-xs mt-2 ml-1">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div class="mb-6">
