@@ -53,8 +53,132 @@
                     <div class="absolute inset-0 flex items-center justify-center animate-float">
                         <div
                             class="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-card-bg shadow-2xl relative z-10 group cursor-pointer">
-                            <img src="https://placehold.co/500x500/1e293b/white?text=Naoval" alt="Naoval"
-                                class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-700 transform group-hover:scale-110">
+                            <img src="{{ asset('images/my-profile.jpg') }}" alt="Naoval Profile"
+                                class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-700 transform group-hover:scale-150">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-32 relative reveal">
+        <div class="absolute top-1/2 right-0 w-96 h-96 bg-primary/5 rounded-full blur-[128px] -z-10"></div>
+        <div class="absolute bottom-0 left-20 w-72 h-72 bg-purple-600/5 rounded-full blur-[96px] -z-10"></div>
+
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center gap-16">
+
+                <div class="w-full md:w-5/12 relative group">
+                    <div
+                        class="relative rounded-3xl overflow-hidden border border-gray-700 transform rotate-3 group-hover:rotate-0 transition duration-500 shadow-2xl">
+                        <img src="{{ asset('images/my-profile.jpg') }}" alt="About Naoval"
+                            class="w-full h-auto object-cover grayscale group-hover:grayscale-0 transition duration-700">
+
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark-bg/80 via-transparent to-transparent"></div>
+                    </div>
+
+                    <div
+                        class="absolute -bottom-6 -right-6 md:-right-10 bg-card-bg/90 backdrop-blur-md p-6 rounded-2xl border border-gray-700 shadow-xl animate-float">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center text-primary">
+                                <i class="fas fa-code text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="text-3xl font-bold text-white">2+</p>
+                                <p class="text-xs text-gray-400 uppercase tracking-wide">Years Experience</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-full md:w-7/12">
+                    <div
+                        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-semibold tracking-wide uppercase mb-6">
+                        <span class="w-2 h-2 rounded-full bg-primary"></span> About Me
+                    </div>
+
+                    <h2 class="text-4xl font-bold text-white mb-6 leading-tight">
+                        Mengkombinasikan <br><span class="text-primary">Logika</span> & <span
+                            class="text-purple-400">Kreativitas</span>
+                    </h2>
+
+                    <div class="text-gray-400 space-y-4 text-lg leading-relaxed mb-8">
+                        <p>
+                            Halo! Saya Naoval, seorang mahasiswa Informatika yang memiliki ketertarikan mendalam pada dunia
+                            <span class="text-gray-200 font-medium">Software Engineering</span>.
+                        </p>
+                        <p>
+                            Perjalanan koding saya dimulai dari rasa penasaran tentang bagaimana sebuah website bekerja.
+                            Kini, saya fokus mengembangkan aplikasi web modern yang tidak hanya fungsional,
+                            tetapi juga memiliki performa tinggi dan *user experience* yang intuitif.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
+                        <div class="flex items-start gap-4">
+                            <div
+                                class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-primary shrink-0">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-semibold">Pendidikan</h4>
+                                <p class="text-sm text-gray-500">S1 Informatika, Universitas X</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div
+                                class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-primary shrink-0">
+                                <i class="far fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-semibold">Email</h4>
+                                <p class="text-sm text-gray-500">contact@naoval.dev</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div
+                                class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-primary shrink-0">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-semibold">Domisili</h4>
+                                <p class="text-sm text-gray-500">Surabaya, Indonesia</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div
+                                class="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-primary shrink-0">
+                                <i class="fas fa-laptop-code"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-semibold">Minat Utama</h4>
+                                <p class="text-sm text-gray-500">Web & Mobile Dev</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap gap-4 border-t border-gray-800 pt-8">
+                        <a href="#"
+                            class="px-7 py-3 bg-white text-dark-bg font-bold rounded-full hover:bg-gray-200 transition flex items-center gap-2">
+                            Download CV <i class="fas fa-download text-sm"></i>
+                        </a>
+                        <div class="flex gap-4 items-center px-4">
+                            <a href="#"
+                                class="w-10 h-10 rounded-full border border-gray-600 flex items-center justify-center text-gray-400 hover:text-white hover:border-primary hover:bg-primary transition duration-300">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="#"
+                                class="w-10 h-10 rounded-full border border-gray-600 flex items-center justify-center text-gray-400 hover:text-white hover:border-primary hover:bg-primary transition duration-300">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#"
+                                class="w-10 h-10 rounded-full border border-gray-600 flex items-center justify-center text-gray-400 hover:text-white hover:border-primary hover:bg-primary transition duration-300">
+                                <i class="fab fa-instagram"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -132,12 +256,15 @@
         <div class="container mx-auto px-6">
             <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
                 <div>
-                    <h2 class="text-4xl font-bold text-white mb-4">Featured <span class="text-primary">Projects</span></h2>
-                    <p class="text-gray-400 max-w-lg">Beberapa project terbaik yang pernah saya kerjakan, mulai dari website
+                    <h2 class="text-4xl font-bold text-white mb-4">Featured <span class="text-primary">Projects</span>
+                    </h2>
+                    <p class="text-gray-400 max-w-lg">Beberapa project terbaik yang pernah saya kerjakan, mulai dari
+                        website
                         hingga aplikasi mobile.</p>
                 </div>
-                <a href="#" class="text-primary font-semibold hover:text-white transition flex items-center gap-2">
-                    View All Projects <i class="fas fa-arrow-right"></i>
+                <a href="{{ route('projects.index') }}"
+                    class="text-primary font-semibold hover:text-white transition flex items-center gap-2 group">
+                    View All Projects <i class="fas fa-arrow-right group-hover:translate-x-1 transition"></i>
                 </a>
             </div>
 
