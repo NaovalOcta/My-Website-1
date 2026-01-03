@@ -40,10 +40,16 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 @foreach ($projects as $project)
                     <div
-                        class="group relative rounded-3xl overflow-hidden border border-gray-800 bg-card-bg hover:border-primary/50 transition duration-500 hover:-translate-y-2 reveal">
+                        class="group relative rounded-3xl overf low-hidden border border-gray-800 bg-card-bg hover:border-primary/50 transition duration-500 hover:-translate-y-2 reveal">
+
+                        @php
+                            $imagePath = Str::startsWith($project->image, 'projects')
+                                ? asset('storage/' . $project->image)
+                                : asset($project->image);
+                        @endphp
 
                         <div class="aspect-[4/3] bg-gray-800 relative overflow-hidden">
-                            <img src="{{ $project->image }}" alt="{{ $project->title }}"
+                            <img src="{{ $imagePath }}" alt="{{ $project->title }}"
                                 class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
 
                             <div class="absolute top-4 left-4">
@@ -61,15 +67,6 @@
                             <p class="text-gray-400 text-sm mb-6 line-clamp-2 leading-relaxed">
                                 {{ $project->description }}
                             </p>
-
-                            <div class="flex flex-wrap gap-2">
-                                @foreach ($project->tech as $tech)
-                                    <span
-                                        class="px-3 py-1 bg-gray-800/50 border border-gray-700 rounded-lg text-xs text-gray-300 font-medium group-hover:border-primary/30 transition">
-                                        {{ $tech }}
-                                    </span>
-                                @endforeach
-                            </div>
                         </div>
                     </div>
                 @endforeach

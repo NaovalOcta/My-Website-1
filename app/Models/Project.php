@@ -9,9 +9,15 @@ class Project extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'category', 'image', 'description', 'tech'];
+    protected $fillable = [
+        'title',
+        'category',
+        'image',
+        'description',
+        'link',
+        'tech',
+    ];
 
-    // PENTING: Casting ini mengubah JSON di database menjadi Array PHP
     protected $casts = [
         'tech' => 'array',
     ];

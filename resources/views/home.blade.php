@@ -270,25 +270,27 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="group relative rounded-3xl overflow-hidden border border-gray-800 bg-card-bg">
-                    <div class="aspect-video bg-gray-800 relative overflow-hidden">
-                        <img src="https://placehold.co/600x400/111827/334155?text=Project+Preview" alt="Project 1"
-                            class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
-                        <div
-                            class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
-                            <a href="#"
-                                class="px-6 py-2 bg-primary text-white rounded-full font-bold transform translate-y-4 group-hover:translate-y-0 transition duration-300">View
-                                Details</a>
+                    @foreach ($projects as $project)
+                        <div class="relative overflow-hidden group rounded-xl">
+                            {{-- LOGIKA GAMBAR: Cek apakah gambar dari database (tersimpan di folder projects) atau dummy --}}
+                            @php
+                                $imagePath = Str::startsWith($project->image, 'projects')
+                                    ? asset('storage/' . $project->image)
+                                    : asset($project->image);
+                            @endphp
+
+                            <img src="{{ $imagePath }}" alt="{{ $project->title }}"
+                                class="w-full h-64 object-cover transform group-hover:scale-110 transition duration-500">
+
+                            <div class="p-6">
+                                <span class="text-primary text-xs font-bold uppercase tracking-wider mb-2 block">
+                                    {{ $project->category }}
+                                </span>
+                                <h3 class="text-xl font-bold text-white mb-2">{{ $project->title }}</h3>
+                                <p class="text-gray-400 text-sm line-clamp-2">{{ $project->description }}</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-white mb-2">E-Commerce App</h3>
-                        <p class="text-gray-400 text-sm mb-4 line-clamp-2">Aplikasi toko online berbasis mobile menggunakan
-                            Flutter dan Laravel API.</p>
-                        <div class="flex gap-2">
-                            <span class="px-3 py-1 bg-gray-800 text-xs text-gray-300 rounded-full">Flutter</span>
-                            <span class="px-3 py-1 bg-gray-800 text-xs text-gray-300 rounded-full">Laravel</span>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
 
                 <div class="group relative rounded-3xl overflow-hidden border border-gray-800 bg-card-bg">

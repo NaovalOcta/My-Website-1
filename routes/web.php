@@ -3,8 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProjectController;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AdminProjectController;
 
 // --- PUBLIK (Bisa diakses siapa saja) ---
 Route::get('/', [HomeController::class, 'index']);
@@ -27,6 +27,13 @@ Route::middleware('auth')->prefix('admin')->group(function () {
         return view('admin.dashboard');
     })->name('admin.dashboard');
 
-    // Nanti tambahkan route admin lain di sini, misal:
-    // Route::resource('projects', AdminProjectController::class);
+    Route::resource('projects', AdminProjectController::class)->names([
+        'index' => 'admin.projects.index',
+        'create' => 'admin.projects.create',
+        'store' => 'admin.projects.store',
+        'show' => 'admin.projects.show',
+        'edit' => 'admin.projects.edit',
+        'update' => 'admin.projects.update',
+        'destroy' => 'admin.projects.destroy',
+    ]);
 });
