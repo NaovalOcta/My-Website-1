@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class AdminProjectController extends Controller
 {
@@ -21,42 +22,44 @@ class AdminProjectController extends Controller
 
     public function store(Request $request)
     {
+        // 1. Perbaiki Validasi: 'tech' harus 'string' (bukan array)
         $request->validate([
-            'title' => 'required|string|max:255',
-            'category' => 'required|string|max:255',
+            'title'       => 'required|string|max:255',
+            'category'    => 'required|string|max:255',
             'description' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'link' => 'nullable|url',
-            'tech' => 'required|array',
+            'image'       => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'link'        => 'nullable|url',
+            'tech'        => 'nullable|string', // <--- UBAH INI JADI STRING
         ]);
 
-        $imagePath = $request->file('image')->store('projects', 'public');
-        $techInput = $request->input('tech');
+        // 2. Ambil semua data request dasar dulu
+        $data = $request->only(['title', 'category', 'description', 'link']);
 
-        // Jika ada input tech
-        if ($techInput) {
-            // 1. Pecah string berdasarkan koma
-            $techArray = explode(',', $techInput);
-
-            // 2. Bersihkan spasi di awal/akhir setiap item (trim)
-            $techArray = array_map('trim', $techArray);
-
-            // 3. Ambil hanya 5 item pertama (Limitasi Max 5)
-            $data['tech'] = array_slice($techArray, 0, 5);
-        } else {
-            $data['tech'] = []; // Kosongkan jika tidak ada input
+        // 3. Proses Image
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('projects', 'public');
         }
 
-        Project::create([
-            'title' => $request->title,
-            'category' => $request->category,
-            'description' => $request->description,
-            'image' => $imagePath,
-            'link' => $request->link,
-            'tech' => $request->tech,
-        ]);
+        // 4. Generate Slug
+        $data['slug'] = Str::slug($request->title);
+        if (Project::where('slug', $data['slug'])->exists()) {
+            $data['slug'] .= '-' . Str::random(5);
+        }
 
-        return redirect()->route('admin.projects.index')->with('success', 'Project berhasil ditambahkan!');
+        // 5. Proses Tech Stack (String -> Array)
+        if ($request->filled('tech')) {
+            // Pecah string "Laravel, MySQL" menjadi array ["Laravel", "MySQL"]
+            $techArray = explode(',', $request->tech);
+            $techArray = array_map('trim', $techArray); // Hapus spasi
+            $data['tech'] = array_slice($techArray, 0, 5); // Ambil maks 5
+        } else {
+            $data['tech'] = [];
+        }
+
+        // 6. Simpan ke Database
+        Project::create($data);
+
+        return redirect()->route('admin.projects.index')->with('success', 'Project berhasil dibuat!');
     }
 
     public function edit(Project $project)
@@ -66,39 +69,48 @@ class AdminProjectController extends Controller
 
     public function update(Request $request, Project $project)
     {
+        // 1. Validasi (Sama seperti store, tapi image jadi nullable)
         $request->validate([
-            'title' => 'required|string|max:255',
-            'category' => 'required|string|max:255',
+            'title'       => 'required|string|max:255',
+            'category'    => 'required|string|max:255',
             'description' => 'required',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Image optional saat update
-            'link' => 'nullable|url',
-            'tech' => 'required|array',
+            'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Tidak wajib saat update
+            'link'        => 'nullable|url',
+            'tech'        => 'nullable|string', // WAJIB STRING (bukan array)
         ]);
 
+        // 2. Ambil data dasar
         $data = $request->only(['title', 'category', 'description', 'link']);
-        $techInput = $request->input('tech');
 
-        if ($techInput) {
-            // 1. Pecah string berdasarkan koma
-            $techArray = explode(',', $techInput);
+        // 3. Logika Update Slug (Hanya generate ulang jika Title berubah)
+        if ($request->title != $project->title) {
+            $data['slug'] = Str::slug($request->title);
 
-            // 2. Bersihkan spasi di awal/akhir setiap item (trim)
-            $techArray = array_map('trim', $techArray);
-
-            // 3. Ambil hanya 5 item pertama (Limitasi Max 5)
-            $data['tech'] = array_slice($techArray, 0, 5);
-        } else {
-            $data['tech'] = []; // Kosongkan jika tidak ada input
+            // Cek unik: pastikan slug baru belum dipakai orang lain (kecuali diri sendiri)
+            if (Project::where('slug', $data['slug'])->where('id', '!=', $project->id)->exists()) {
+                $data['slug'] .= '-' . Str::random(5);
+            }
         }
 
+        // 4. Proses Tech Stack (String -> Array)
+        if ($request->filled('tech')) {
+            $techArray = explode(',', $request->tech);
+            $techArray = array_map('trim', $techArray); // Bersihkan spasi
+            $data['tech'] = array_slice($techArray, 0, 5); // Batasi 5
+        } else {
+            // Jika input kosong, set array kosong (hapus tech stack yang ada)
+            $data['tech'] = [];
+        }
+
+        // 5. Proses Image Baru (Hapus lama, simpan baru)
         if ($request->hasFile('image')) {
-            // Hapus gambar lama jika ada
             if ($project->image) {
                 Storage::disk('public')->delete($project->image);
             }
             $data['image'] = $request->file('image')->store('projects', 'public');
         }
 
+        // 6. Eksekusi Update
         $project->update($data);
 
         return redirect()->route('admin.projects.index')->with('success', 'Project berhasil diperbarui!');

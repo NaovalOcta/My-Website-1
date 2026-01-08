@@ -11,6 +11,7 @@ class Project extends Model
 
     protected $fillable = [
         'title',
+        'slug',
         'category',
         'image',
         'description',
@@ -21,4 +22,9 @@ class Project extends Model
     protected $casts = [
         'tech' => 'array',
     ];
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }

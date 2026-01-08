@@ -66,12 +66,12 @@
                                 </td>
                                 <td class="p-4 text-right">
                                     <div class="flex items-center justify-end gap-2">
-                                        <a href="{{ route('admin.projects.edit', $project->id) }}"
+                                        <a href="{{ route('admin.projects.edit', $project) }}"
                                             class="p-2 rounded-lg bg-gray-800 hover:bg-gray-700 text-gray-400 hover:text-white transition"
                                             title="Edit">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <form action="{{ route('admin.projects.destroy', $project->id) }}" method="POST"
+                                        <form action="{{ route('admin.projects.destroy', $project) }}" method="POST"
                                             onsubmit="return confirm('Apakah Anda yakin ingin menghapus project ini?');">
                                             @csrf
                                             @method('DELETE')

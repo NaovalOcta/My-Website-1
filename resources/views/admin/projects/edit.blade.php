@@ -11,7 +11,7 @@
         </a>
 
         <div class="bg-card-bg rounded-2xl border border-gray-800 shadow-lg p-6 lg:p-8">
-            <form action="{{ route('admin.projects.update', $project->id) }}" method="POST" enctype="multipart/form-data"
+            <form action="{{ route('admin.projects.update', $project) }}" method="POST" enctype="multipart/form-data"
                 class="space-y-6">
                 @csrf
                 @method('PUT') <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -50,7 +50,8 @@
                         Technologies Used <span class="text-gray-500 text-xs font-normal">(Separate with comma, Max
                             5)</span>
                     </label>
-                    <input type="text" name="tech" id="tech" value="{{ old('tech') }}"
+                    <input type="text" name="tech" id="tech"
+                        value="{{ old('tech', is_array($project->tech) ? implode(', ', $project->tech) : $project->tech) }}"
                         class="w-full bg-gray-900/50 border border-gray-700 rounded-lg px-4 py-2.5 text-gray-200 focus:outline-none focus:border-primary transition placeholder-gray-600"
                         placeholder="e.g. Laravel, Tailwind CSS, MySQL, Figma">
                     <p class="text-xs text-gray-500">Example: "Laravel, VueJS, MySQL"</p>
