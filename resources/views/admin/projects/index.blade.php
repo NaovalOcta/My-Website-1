@@ -33,6 +33,8 @@
                             <th class="p-4 font-medium">Image</th>
                             <th class="p-4 font-medium">Title & Category</th>
                             <th class="p-4 font-medium">Description</th>
+                            <th class="p-4 font-medium">Link Github</th>
+                            <th class="p-4 font-medium">Tech Stack</th>
                             <th class="p-4 font-medium">Created At</th>
                             <th class="p-4 font-medium text-right">Actions</th>
                         </tr>
@@ -60,6 +62,12 @@
                                 </td>
                                 <td class="p-4 text-gray-400 max-w-xs truncate">
                                     {{ Str::limit($project->description, 50) }}
+                                </td>
+                                <td class="p-4 text-gray-400 max-w-xs truncate">
+                                    {{ Str::limit($project->link, 50) }}
+                                </td>
+                                <td class="p-4 text-gray-400 max-w-xs truncate">
+                                    {{ $project->tech ? implode(', ', $project->tech) : '-' }}
                                 </td>
                                 <td class="p-4 text-gray-500 text-xs">
                                     {{ $project->created_at->format('d M Y') }}

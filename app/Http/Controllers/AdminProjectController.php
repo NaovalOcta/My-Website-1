@@ -49,9 +49,9 @@ class AdminProjectController extends Controller
         // 5. Proses Tech Stack (String -> Array)
         if ($request->filled('tech')) {
             // Pecah string "Laravel, MySQL" menjadi array ["Laravel", "MySQL"]
-            $techArray = explode(',', $request->tech);
-            $techArray = array_map('trim', $techArray); // Hapus spasi
-            $data['tech'] = array_slice($techArray, 0, 5); // Ambil maks 5
+            $techArray = array_map('trim', explode(',', $request->tech));
+            $techArray = array_filter($techArray);
+            $data['tech'] = array_values(array_slice($techArray, 0, 5));
         } else {
             $data['tech'] = [];
         }
@@ -94,9 +94,9 @@ class AdminProjectController extends Controller
 
         // 4. Proses Tech Stack (String -> Array)
         if ($request->filled('tech')) {
-            $techArray = explode(',', $request->tech);
-            $techArray = array_map('trim', $techArray); // Bersihkan spasi
-            $data['tech'] = array_slice($techArray, 0, 5); // Batasi 5
+            $techArray = array_map('trim', explode(',', $request->tech));
+            $techArray = array_filter($techArray);
+            $data['tech'] = array_values(array_slice($techArray, 0, 5));
         } else {
             // Jika input kosong, set array kosong (hapus tech stack yang ada)
             $data['tech'] = [];
