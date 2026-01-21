@@ -271,7 +271,8 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="group relative rounded-3xl overflow-hidden border border-gray-800 bg-card-bg">
                     @foreach ($projects as $project)
-                        <div class="relative overflow-hidden group rounded-xl">
+                        <a href="{{ route('projects.show', $project) }}"
+                            class="relative overflow-hidden group rounded-xl">
                             {{-- LOGIKA GAMBAR: Cek apakah gambar dari database (tersimpan di folder projects) atau dummy --}}
                             @php
                                 $imagePath = Str::startsWith($project->image, 'projects')
@@ -283,13 +284,19 @@
                                 class="w-full h-64 object-cover transform group-hover:scale-110 transition duration-500">
 
                             <div class="p-6">
-                                <span class="text-primary text-xs font-bold uppercase tracking-wider mb-2 block">
+                                {{-- <span class="text-primary text-xs font-bold uppercase tracking-wider mb-2 block">
                                     {{ $project->category }}
-                                </span>
-                                <h3 class="text-xl font-bold text-white mb-2">{{ $project->title }}</h3>
-                                <p class="text-gray-400 text-sm line-clamp-2">{{ $project->description }}</p>
+                                </span> --}}
+                                <h3 class="text-2xl font-bold text-white mb-4">{{ $project->title }}</h3>
+                                <p class="text-gray-400 text-sm line-clamp-2 mb-4">{{ $project->description }}</p>
+                                <div class="flex gap-2">
+                                    @foreach ($project->tech as $item)
+                                        <span
+                                            class="px-3 py-1 bg-gray-800 text-xs text-gray-300 rounded-full">{{ $item }}</span>
+                                    @endforeach
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     @endforeach
                 </div>
 

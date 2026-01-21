@@ -52,4 +52,10 @@ class ProjectController extends Controller
         // 3. Kirim data ke View
         return view('projects.index', compact('projects'));
     }
+
+    public function show(Project $project)
+    {
+        // Mengembalikan view detail dengan data project
+        return view('projects.show', compact('project'));
+    }
 }

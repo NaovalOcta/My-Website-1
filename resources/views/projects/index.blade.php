@@ -39,8 +39,8 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 @foreach ($projects as $project)
-                    <div
-                        class="group relative rounded-3xl overf low-hidden border border-gray-800 bg-card-bg hover:border-primary/50 transition duration-500 hover:-translate-y-2 reveal">
+                    <a href="{{ route('projects.show', $project) }}"
+                        class="group relative rounded-3xl overflow-hidden border border-gray-800 bg-card-bg hover:border-primary/50 transition duration-500 hover:-translate-y-2 reveal">
 
                         @php
                             $imagePath = Str::startsWith($project->image, 'projects')
@@ -68,7 +68,7 @@
                                 {{ $project->description }}
                             </p>
                         </div>
-                    </div>
+                    </a>
                 @endforeach
             </div>
 

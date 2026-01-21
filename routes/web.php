@@ -9,6 +9,7 @@ use App\Http\Controllers\AdminProjectController;
 // --- PUBLIK (Bisa diakses siapa saja) ---
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
+Route::get('/projects/{project}', [ProjectController::class, 'show'])->name('projects.show');
 
 // --- AUTENTIKASI (Login/Logout) ---
 // Middleware 'guest' artinya yang sudah login TIDAK BISA akses halaman ini (langsung dilempar ke dashboard)
