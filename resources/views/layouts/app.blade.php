@@ -13,20 +13,53 @@
 
 <body class="bg-dark-bg text-gray-300 font-sans antialiased">
 
-    <nav class="fixed w-full z-50 bg-dark-bg/90 backdrop-blur-md border-b border-gray-800">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-white"><span class="text-primary">Naoval</span>Dev.</a>
+    <nav id="top-navbar"
+        class="fixed top-6 inset-x-0 z-50 mx-auto max-w-7xl px-4 transition-transform duration-500 ease-in-out">
+        <div
+            class="flex items-center justify-between bg-gray-900/80 backdrop-blur-md border border-white/10 rounded-full px-6 py-3 shadow-2xl ring-1 ring-white/5">
 
-            <div class="hidden md:flex space-x-8">
-                <a href="#home" class="hover:text-primary transition">Home</a>
-                <a href="#about" class="hover:text-primary transition">About</a>
-                <a href="#skills" class="hover:text-primary transition">Skills</a>
-                <a href="#portfolio" class="hover:text-primary transition">Portfolio</a>
+            {{-- 1. Logo Section --}}
+            <a href="{{ route('home') }}" class="flex items-center gap-2 group">
+                {{-- Ganti src ini dengan logo kamu --}}
+                <div
+                    class="w-8 h-8 rounded-full bg-gradient-to-tr from-primary to-orange-400 flex items-center justify-center text-white font-bold text-sm shadow-lg group-hover:scale-110 transition duration-300">
+                    N
+                </div>
+                <span class="font-bold text-lg tracking-tight group-hover:text-primary transition">
+                    <span class="text-primary">Naoval</span>Dev.
+                </span>
+            </a>
+
+            {{-- 2. Menu Links (Hidden on Mobile) --}}
+            <div class="hidden md:flex items-center bg-white/5 rounded-full px-1 p-1 border border-white/5">
+                <a href="{{ route('home') }}"
+                    class="px-5 py-1.5 text-sm font-medium rounded-full transition-all duration-300 {{ request()->routeIs('home') ? 'bg-primary text-white shadow-md' : 'text-gray-400 hover:text-white hover:bg-white/5' }}">
+                    Home
+                </a>
+                <a href="{{ route('projects.index') }}"
+                    class="px-5 py-1.5 text-sm font-medium rounded-full transition-all duration-300 {{ request()->routeIs('projects.*') ? 'bg-primary text-white shadow-md' : 'text-gray-400 hover:text-white hover:bg-white/5' }}">
+                    Works
+                </a>
             </div>
 
-            <a href="#contact"
-                class="px-6 py-2 bg-primary text-white font-semibold rounded-full hover:bg-orange-600 transition">Let's
-                Talk</a>
+            {{-- 3. Call to Action / Contact --}}
+            <div class="flex items-center gap-4">
+                {{-- Social Icons (Opsional) --}}
+                <div class="hidden sm:flex items-center gap-3 pr-4 border-r border-gray-700">
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i
+                            class="fab fa-github"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i
+                            class="fab fa-linkedin"></i></a>
+                </div>
+
+                <a href="mailto:email@kamu.com"
+                    class="group relative inline-flex items-center gap-2 px-5 py-2 bg-white text-black text-sm font-bold rounded-full hover:bg-gray-200 transition duration-300 overflow-hidden">
+                    <span class="relative z-10">Let's Talk</span>
+                    <i
+                        class="fas fa-arrow-right -rotate-45 group-hover:rotate-0 transition-transform duration-300 relative z-10"></i>
+                </a>
+            </div>
+
         </div>
     </nav>
 
