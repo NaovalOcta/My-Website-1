@@ -91,55 +91,80 @@
                     </div>
 
                     {{-- 2. Tech Stack (Dipisah agar lebih rapi) --}}
-                    <div class="space-y-3">
-                        <h3 class="text-gray-400 text-sm font-bold uppercase tracking-widest px-1">Built With</h3>
-                        <div class="flex flex-wrap gap-2">
-                            @foreach ($project->tech as $tech)
-                                <span
-                                    class="px-3 py-1.5 bg-gray-900 border border-gray-700 rounded-lg text-sm text-gray-300 hover:border-primary/50 hover:text-white transition cursor-default">
-                                    {{ $tech }}
-                                </span>
-                            @endforeach
+                    @if ($project->tech && count($project->tech) > 0)
+                        <div class="space-y-3">
+                            <h3 class="text-gray-400 text-sm font-bold uppercase tracking-widest px-1">Built With</h3>
+                            <div class="flex flex-wrap gap-2">
+                                @foreach ($project->tech as $tech)
+                                    <span
+                                        class="px-3 py-1.5 bg-gray-900 border border-gray-700 rounded-lg text-sm text-gray-300 hover:border-primary/50 hover:text-white transition cursor-default">
+                                        {{ $tech }}
+                                    </span>
+                                @endforeach
+                            </div>
                         </div>
-                    </div>
+                    @endif
 
-                    {{-- 3. Resources / Links (Repository, Figma, etc) --}}
-                    <div class="space-y-3 pt-4">
-                        <h3 class="text-gray-400 text-sm font-bold uppercase tracking-widest px-1">Resources</h3>
-                        <div class="flex flex-col gap-2">
+                    {{-- 3. Resources / Links (Repository, Figma, etc) - DINAMIS --}}
+                    @if ($project->link || $project->github_link || $project->design_link)
+                        <div class="space-y-3 pt-4">
+                            <h3 class="text-gray-400 text-sm font-bold uppercase tracking-widest px-1">Resources</h3>
+                            <div class="flex flex-col gap-2">
 
-                            {{-- Link Github (Contoh) --}}
-                            <a href="#"
-                                class="flex items-center justify-between p-3 rounded-xl bg-gray-900/50 border border-gray-800 hover:bg-gray-800 hover:border-gray-600 transition group">
-                                <div class="flex items-center gap-3">
-                                    <div
-                                        class="w-8 h-8 rounded-full bg-black flex items-center justify-center border border-gray-700">
-                                        <i class="fab fa-github text-white"></i>
-                                    </div>
-                                    <span class="text-gray-300 text-sm font-medium group-hover:text-white">Source
-                                        Code</span>
-                                </div>
-                                <i
-                                    class="fas fa-arrow-right text-xs text-gray-600 group-hover:text-primary -rotate-45 group-hover:rotate-0 transition"></i>
-                            </a>
+                                {{-- Live Demo Link --}}
+                                @if ($project->link)
+                                    <a href="{{ $project->link }}" target="_blank"
+                                        class="flex items-center justify-between p-3 rounded-xl bg-gray-900/50 border border-gray-800 hover:bg-gray-800 hover:border-gray-600 transition group">
+                                        <div class="flex items-center gap-3">
+                                            <div
+                                                class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center border border-primary/30">
+                                                <i class="fas fa-globe text-primary"></i>
+                                            </div>
+                                            <span class="text-gray-300 text-sm font-medium group-hover:text-white">Live
+                                                Demo</span>
+                                        </div>
+                                        <i
+                                            class="fas fa-arrow-right text-xs text-gray-600 group-hover:text-primary -rotate-45 group-hover:rotate-0 transition"></i>
+                                    </a>
+                                @endif
 
-                            {{-- Link Figma (Contoh) --}}
-                            <a href="#"
-                                class="flex items-center justify-between p-3 rounded-xl bg-gray-900/50 border border-gray-800 hover:bg-gray-800 hover:border-gray-600 transition group">
-                                <div class="flex items-center gap-3">
-                                    <div
-                                        class="w-8 h-8 rounded-full bg-black flex items-center justify-center border border-gray-700">
-                                        <i class="fab fa-figma text-purple-400"></i>
-                                    </div>
-                                    <span class="text-gray-300 text-sm font-medium group-hover:text-white">Design
-                                        File</span>
-                                </div>
-                                <i
-                                    class="fas fa-arrow-right text-xs text-gray-600 group-hover:text-primary -rotate-45 group-hover:rotate-0 transition"></i>
-                            </a>
+                                {{-- GitHub Repository --}}
+                                @if ($project->github_link)
+                                    <a href="{{ $project->github_link }}" target="_blank"
+                                        class="flex items-center justify-between p-3 rounded-xl bg-gray-900/50 border border-gray-800 hover:bg-gray-800 hover:border-gray-600 transition group">
+                                        <div class="flex items-center gap-3">
+                                            <div
+                                                class="w-8 h-8 rounded-full bg-black flex items-center justify-center border border-gray-700">
+                                                <i class="fab fa-github text-white"></i>
+                                            </div>
+                                            <span class="text-gray-300 text-sm font-medium group-hover:text-white">Source
+                                                Code</span>
+                                        </div>
+                                        <i
+                                            class="fas fa-arrow-right text-xs text-gray-600 group-hover:text-primary -rotate-45 group-hover:rotate-0 transition"></i>
+                                    </a>
+                                @endif
 
+                                {{-- Figma Design --}}
+                                @if ($project->design_link)
+                                    <a href="{{ $project->design_link }}" target="_blank"
+                                        class="flex items-center justify-between p-3 rounded-xl bg-gray-900/50 border border-gray-800 hover:bg-gray-800 hover:border-gray-600 transition group">
+                                        <div class="flex items-center gap-3">
+                                            <div
+                                                class="w-8 h-8 rounded-full bg-black flex items-center justify-center border border-gray-700">
+                                                <i class="fab fa-figma text-purple-400"></i>
+                                            </div>
+                                            <span class="text-gray-300 text-sm font-medium group-hover:text-white">Design
+                                                File</span>
+                                        </div>
+                                        <i
+                                            class="fas fa-arrow-right text-xs text-gray-600 group-hover:text-primary -rotate-45 group-hover:rotate-0 transition"></i>
+                                    </a>
+                                @endif
+
+                            </div>
                         </div>
-                    </div>
+                    @endif
 
                 </div>
             </div>
@@ -155,56 +180,93 @@
                     </div>
                 </section>
 
-                {{-- Section: Features (Contoh Dummy) --}}
-                <section id="features" class="scroll-mt-32 border-t border-gray-800 pt-16">
-                    <h2 class="text-3xl md:text-5xl font-bold text-white mb-12">Key Features</h2>
+                {{-- Section: Features (DINAMIS dari database) --}}
+                @php
+                    $features = $project->features ?? [];
+                    if (is_string($features)) {
+                        $features = json_decode($features, true) ?? [];
+                    }
+                    // Handle legacy string array format and filter empty
+                    if (count($features) > 0) {
+                        if (isset($features[0]) && is_string($features[0])) {
+                            $features = array_map(
+                                fn($f) => ['title' => $f, 'icon' => 'fas fa-star', 'description' => ''],
+                                $features,
+                            );
+                        }
+                        $features = array_filter($features, fn($f) => !empty($f['title']));
+                    }
+                @endphp
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        {{-- Feature Card 1 --}}
-                        <div
-                            class="bg-card-bg border border-gray-800 p-8 rounded-3xl hover:border-primary/50 transition duration-500">
-                            <div
-                                class="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center text-primary mb-6">
-                                <i class="fas fa-bolt text-xl"></i>
-                            </div>
-                            <h3 class="text-2xl font-bold text-white mb-4">Fast Performance</h3>
-                            <p class="text-gray-400">Optimized database queries ensuring content loads in under 100ms.</p>
-                        </div>
+                @if (count($features) > 0)
+                    <section id="features" class="scroll-mt-32 border-t border-gray-800 pt-16">
+                        <h2 class="text-3xl md:text-5xl font-bold text-white mb-12">Key Features</h2>
 
-                        {{-- Feature Card 2 --}}
-                        <div
-                            class="bg-card-bg border border-gray-800 p-8 rounded-3xl hover:border-primary/50 transition duration-500">
-                            <div
-                                class="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center text-primary mb-6">
-                                <i class="fas fa-shield-alt text-xl"></i>
-                            </div>
-                            <h3 class="text-2xl font-bold text-white mb-4">Secure System</h3>
-                            <p class="text-gray-400">Implemented advanced authentication and role-based access control.</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            @foreach ($features as $feature)
+                                <div
+                                    class="bg-card-bg border border-gray-800 p-8 rounded-3xl hover:border-primary/50 transition duration-500 group">
+                                    <div
+                                        class="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition">
+                                        <i class="{{ $feature['icon'] ?? 'fas fa-star' }} text-xl"></i>
+                                    </div>
+                                    <h3 class="text-xl font-bold text-white mb-2">{{ $feature['title'] }}</h3>
+                                    @if (!empty($feature['description']))
+                                        <p class="text-gray-400">{{ $feature['description'] }}</p>
+                                    @endif
+                                </div>
+                            @endforeach
                         </div>
-                    </div>
-                </section>
+                    </section>
+                @endif
 
-                {{-- Section: Gallery (Contoh Visual Besar) --}}
-                <section id="gallery" class="scroll-mt-32 border-t border-gray-800 pt-16">
-                    <h2 class="text-3xl md:text-5xl font-bold text-white mb-12">Visual Gallery</h2>
+                {{-- Section: Gallery (DINAMIS dari database) --}}
+                @if ($project->galleries && $project->galleries->count() > 0)
+                    <section id="gallery" class="scroll-mt-32 border-t border-gray-800 pt-16">
+                        <h2 class="text-3xl md:text-5xl font-bold text-white mb-12">Visual Gallery</h2>
 
-                    <div class="space-y-8">
-                        {{-- Large Image 1 --}}
-                        <div
-                            class="w-full h-[500px] bg-gray-800 rounded-3xl flex items-center justify-center text-gray-600 border border-gray-800">
-                            <span>Gallery Image 1 (Add more images to DB later)</span>
+                        <div class="space-y-8">
+                            @foreach ($project->galleries as $index => $gallery)
+                                @if ($index === 0)
+                                    {{-- First image: Large display --}}
+                                    <div class="w-full rounded-3xl overflow-hidden border border-gray-800 group cursor-pointer"
+                                        onclick="openLightbox('{{ asset('storage/' . $gallery->image_path) }}')">
+                                        <img src="{{ asset('storage/' . $gallery->image_path) }}"
+                                            alt="Gallery Image {{ $index + 1 }}"
+                                            class="w-full h-auto max-h-[500px] object-cover group-hover:scale-105 transition duration-700">
+                                    </div>
+                                @endif
+                            @endforeach
+
+                            {{-- Grid for remaining images --}}
+                            @if ($project->galleries->count() > 1)
+                                <div class="grid grid-cols-2 gap-8">
+                                    @foreach ($project->galleries->skip(1) as $index => $gallery)
+                                        <div class="aspect-square rounded-3xl overflow-hidden border border-gray-800 group cursor-pointer"
+                                            onclick="openLightbox('{{ asset('storage/' . $gallery->image_path) }}')">
+                                            <img src="{{ asset('storage/' . $gallery->image_path) }}"
+                                                alt="Gallery Image {{ $index + 2 }}"
+                                                class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+                                        </div>
+                                    @endforeach
+                                </div>
+                            @endif
                         </div>
-                        {{-- Grid Images --}}
-                        <div class="grid grid-cols-2 gap-8">
-                            <div class="aspect-square bg-gray-800 rounded-3xl border border-gray-800"></div>
-                            <div class="aspect-square bg-gray-800 rounded-3xl border border-gray-800"></div>
-                        </div>
-                    </div>
-                </section>
+                    </section>
+                @endif
 
             </div>
         </div>
 
+    </div>
+
+    {{-- LIGHTBOX MODAL for Gallery --}}
+    <div id="lightbox" class="fixed inset-0 z-50 bg-black/95 hidden items-center justify-center p-4"
+        onclick="closeLightbox()">
+        <button class="absolute top-6 right-6 text-white text-3xl hover:text-primary transition">
+            <i class="fas fa-times"></i>
+        </button>
+        <img id="lightbox-image" src="" alt="Lightbox" class="max-w-full max-h-[90vh] rounded-xl shadow-2xl">
     </div>
 
     {{-- BOTTOM NAVBAR (Floating Contextual) --}}
@@ -221,10 +283,16 @@
             <div class="flex items-center gap-1">
                 <a href="#overview"
                     class="px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-white/10 rounded-full transition">Overview</a>
-                <a href="#features"
-                    class="px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-white/10 rounded-full transition">Features</a>
-                <a href="#gallery"
-                    class="px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-white/10 rounded-full transition">Gallery</a>
+
+                @if (isset($features) && count($features) > 0)
+                    <a href="#features"
+                        class="px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-white/10 rounded-full transition">Features</a>
+                @endif
+
+                @if ($project->galleries && $project->galleries->count() > 0)
+                    <a href="#gallery"
+                        class="px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-white/10 rounded-full transition">Gallery</a>
+                @endif
             </div>
 
             @if ($project->link)
@@ -236,8 +304,31 @@
         </div>
     </div>
 
-    {{-- SCRIPT SCROLL LOGIC (Sama seperti sebelumnya, tapi lebih halus) --}}
+    {{-- SCRIPTS --}}
     <script>
+        // Lightbox Functions
+        function openLightbox(imageSrc) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightbox-image');
+            lightboxImage.src = imageSrc;
+            lightbox.classList.remove('hidden');
+            lightbox.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.add('hidden');
+            lightbox.classList.remove('flex');
+            document.body.style.overflow = '';
+        }
+
+        // Close lightbox with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+        });
+
+        // Scroll Navigation Logic
         document.addEventListener('DOMContentLoaded', () => {
             let lastScrollY = window.scrollY;
             const topNav = document.getElementById('top-navbar');
@@ -250,16 +341,16 @@
                 if (currentScrollY > 100) {
                     if (currentScrollY > lastScrollY) {
                         // SCROLL KE BAWAH -> Hide Top, Show Bottom
-                        topNav.classList.add('-translate-y-[200%]');
+                        if (topNav) topNav.classList.add('-translate-y-[200%]');
                         bottomNav.classList.remove('translate-y-[200%]');
                     } else {
                         // SCROLL KE ATAS -> Show Top, Hide Bottom
-                        topNav.classList.remove('-translate-y-[200%]');
+                        if (topNav) topNav.classList.remove('-translate-y-[200%]');
                         bottomNav.classList.add('translate-y-[200%]');
                     }
                 } else {
                     // Posisi Awal (Paling Atas) -> Show Top, Hide Bottom
-                    topNav.classList.remove('-translate-y-[200%]');
+                    if (topNav) topNav.classList.remove('-translate-y-[200%]');
                     bottomNav.classList.add('translate-y-[200%]');
                 }
                 lastScrollY = currentScrollY;

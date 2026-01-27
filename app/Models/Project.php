@@ -17,14 +17,23 @@ class Project extends Model
         'description',
         'link',
         'tech',
+        'github_link',
+        'design_link',
+        'features',
     ];
 
     protected $casts = [
         'tech' => 'array',
+        'features' => 'array',
     ];
 
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+
+    public function galleries()
+    {
+        return $this->hasMany(ProjectGallery::class);
     }
 }
