@@ -9,8 +9,8 @@ class HomeController extends Controller
 {
     public function index()
     {
-        // Ambil data project (bisa Anda isi dummy dulu di database)
-        $projects = Project::all();
+        // Ambil 6 project terbaru untuk ditampilkan di homepage
+        $projects = Project::latest()->take(6)->get();
         return view('home', compact('projects'));
     }
 }

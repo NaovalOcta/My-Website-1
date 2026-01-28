@@ -262,76 +262,86 @@
                         website
                         hingga aplikasi mobile.</p>
                 </div>
-                <a href="{{ route('projects.index') }}"
-                    class="text-primary font-semibold hover:text-white transition flex items-center gap-2 group">
-                    View All Projects <i class="fas fa-arrow-right group-hover:translate-x-1 transition"></i>
-                </a>
+                @if ($projects->count() > 0)
+                    <a href="{{ route('projects.index') }}"
+                        class="text-primary font-semibold hover:text-white transition flex items-center gap-2 group">
+                        View All Projects <i class="fas fa-arrow-right group-hover:translate-x-1 transition"></i>
+                    </a>
+                @endif
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="group relative rounded-3xl overflow-hidden border border-gray-800 bg-card-bg">
+            {{-- Cek apakah ada project --}}
+            @if ($projects->count() > 0)
+                {{-- Grid selalu 3 kolom agar ukuran card konsisten dan rata kiri --}}
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     @foreach ($projects as $project)
                         <a href="{{ route('projects.show', $project) }}"
-                            class="relative overflow-hidden group rounded-xl">
+                            class="group relative rounded-3xl overflow-hidden border border-gray-800 bg-card-bg hover:border-primary/50 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-primary/10 block">
                             {{-- LOGIKA GAMBAR: Cek apakah gambar dari database (tersimpan di folder projects) atau dummy --}}
                             @php
-                                $imagePath = Str::startsWith($project->image, 'projects')
-                                    ? asset('storage/' . $project->image)
-                                    : asset($project->image);
+                                $imagePath = $project->image
+                                    ? (Str::startsWith($project->image, 'projects')
+                                        ? asset('storage/' . $project->image)
+                                        : asset($project->image))
+                                    : 'https://placehold.co/600x400/111827/334155?text=' . urlencode($project->title);
                             @endphp
 
-                            <img src="{{ $imagePath }}" alt="{{ $project->title }}"
-                                class="w-full h-64 object-cover transform group-hover:scale-110 transition duration-500">
+                            <div class="aspect-video bg-gray-800 relative overflow-hidden">
+                                <img src="{{ $imagePath }}" alt="{{ $project->title }}"
+                                    class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                                {{-- Overlay gradient --}}
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-t from-card-bg/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                </div>
+                            </div>
 
                             <div class="p-6">
-                                {{-- <span class="text-primary text-xs font-bold uppercase tracking-wider mb-2 block">
-                                    {{ $project->category }}
-                                </span> --}}
-                                <h3 class="text-2xl font-bold text-white mb-4">{{ $project->title }}</h3>
+                                @if ($project->category)
+                                    <span class="text-primary text-xs font-bold uppercase tracking-wider mb-2 block">
+                                        {{ $project->category }}
+                                    </span>
+                                @endif
+                                <h3 class="text-xl font-bold text-white mb-2 group-hover:text-primary transition-colors">
+                                    {{ $project->title }}</h3>
                                 <p class="text-gray-400 text-sm line-clamp-2 mb-4">{{ $project->description }}</p>
-                                <div class="flex gap-2">
-                                    @foreach ($project->tech as $item)
-                                        <span
-                                            class="px-3 py-1 bg-gray-800 text-xs text-gray-300 rounded-full">{{ $item }}</span>
-                                    @endforeach
-                                </div>
+                                @if ($project->tech && count($project->tech) > 0)
+                                    <div class="flex flex-wrap gap-2">
+                                        @foreach (array_slice($project->tech, 0, 4) as $item)
+                                            <span
+                                                class="px-3 py-1 bg-gray-800 text-xs text-gray-300 rounded-full">{{ $item }}</span>
+                                        @endforeach
+                                        @if (count($project->tech) > 4)
+                                            <span
+                                                class="px-3 py-1 bg-gray-700 text-xs text-gray-400 rounded-full">+{{ count($project->tech) - 4 }}</span>
+                                        @endif
+                                    </div>
+                                @endif
                             </div>
                         </a>
                     @endforeach
                 </div>
-
-                <div class="group relative rounded-3xl overflow-hidden border border-gray-800 bg-card-bg">
-                    <div class="aspect-video bg-gray-800 relative overflow-hidden">
-                        <img src="https://placehold.co/600x400/111827/334155?text=Coming+Soon" alt="Project 2"
-                            class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+            @else
+                {{-- Empty state yang user-friendly --}}
+                <div class="flex flex-col items-center justify-center py-20 px-6">
+                    <div class="w-32 h-32 bg-gray-800/50 rounded-full flex items-center justify-center mb-8 animate-pulse">
+                        <i class="fas fa-folder-open text-5xl text-gray-600"></i>
                     </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-white mb-2">Tourism Website</h3>
-                        <p class="text-gray-400 text-sm mb-4 line-clamp-2">Sistem informasi pariwisata daerah dengan fitur
-                            booking tiket online.</p>
-                        <div class="flex gap-2">
-                            <span class="px-3 py-1 bg-gray-800 text-xs text-gray-300 rounded-full">Laravel</span>
-                            <span class="px-3 py-1 bg-gray-800 text-xs text-gray-300 rounded-full">Bootstrap</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="group relative rounded-3xl overflow-hidden border border-gray-800 bg-card-bg">
-                    <div class="aspect-video bg-gray-800 relative overflow-hidden">
-                        <img src="https://placehold.co/600x400/111827/334155?text=Coming+Soon" alt="Project 3"
-                            class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-white mb-2">IoT Dashboard</h3>
-                        <p class="text-gray-400 text-sm mb-4 line-clamp-2">Dashboard monitoring perangkat IoT Realtime
-                            menggunakan protokol MQTT.</p>
-                        <div class="flex gap-2">
-                            <span class="px-3 py-1 bg-gray-800 text-xs text-gray-300 rounded-full">Vue.js</span>
-                            <span class="px-3 py-1 bg-gray-800 text-xs text-gray-300 rounded-full">MQTT</span>
-                        </div>
+                    <h3 class="text-2xl font-bold text-white mb-4">Belum Ada Project</h3>
+                    <p class="text-gray-400 text-center max-w-md mb-8">
+                        Saat ini belum ada project yang ditampilkan. Project-project terbaik saya akan segera hadir di sini!
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#contact"
+                            class="px-8 py-4 bg-primary text-white font-bold rounded-full hover:bg-orange-600 hover:scale-105 transition transform shadow-lg shadow-orange-500/30 flex items-center gap-2">
+                            <i class="fas fa-envelope"></i> Hubungi Saya
+                        </a>
+                        <a href="#about"
+                            class="px-8 py-4 border border-gray-600 text-white font-bold rounded-full hover:border-primary hover:text-primary hover:bg-gray-800 transition flex items-center gap-2">
+                            <i class="fas fa-user"></i> Tentang Saya
+                        </a>
                     </div>
                 </div>
-            </div>
+            @endif
         </div>
     </section>
 
