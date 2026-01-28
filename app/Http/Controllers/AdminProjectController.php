@@ -36,11 +36,17 @@ class AdminProjectController extends Controller
             'features.*.title'     => 'nullable|string|max:255',
             'features.*.icon'      => 'nullable|string|max:100',
             'features.*.description' => 'nullable|string|max:500',
-            'gallery.*'   => 'nullable|image|max:2048'
+            'gallery.*'   => 'nullable|image|max:2048',
+            // Project Info
+            'role'        => 'nullable|string|max:255',
+            'project_type' => 'nullable|string|max:255',
+            'year'        => 'nullable|string|max:10',
+            'team'        => 'nullable|string|max:255',
+            'timeline'    => 'nullable|string|max:100',
         ]);
 
         // 2. Ambil semua data request dasar dulu
-        $data = $request->only(['title', 'category', 'description', 'link', 'github_link', 'design_link']);
+        $data = $request->only(['title', 'category', 'description', 'link', 'github_link', 'design_link', 'role', 'project_type', 'year', 'team', 'timeline']);
 
         // 3. Proses Image
         if ($request->hasFile('image')) {
@@ -113,11 +119,17 @@ class AdminProjectController extends Controller
             'features.*.title'     => 'nullable|string|max:255',
             'features.*.icon'      => 'nullable|string|max:100',
             'features.*.description' => 'nullable|string|max:500',
-            'gallery.*'   => 'nullable|image|max:2048'
+            'gallery.*'   => 'nullable|image|max:2048',
+            // Project Info
+            'role'        => 'nullable|string|max:255',
+            'project_type' => 'nullable|string|max:255',
+            'year'        => 'nullable|string|max:10',
+            'team'        => 'nullable|string|max:255',
+            'timeline'    => 'nullable|string|max:100',
         ]);
 
         // 2. Ambil data dasar
-        $data = $request->only(['title', 'category', 'description', 'link', 'github_link', 'design_link']);
+        $data = $request->only(['title', 'category', 'description', 'link', 'github_link', 'design_link', 'role', 'project_type', 'year', 'team', 'timeline']);
 
         // 3. Logika Update Slug (Hanya generate ulang jika Title berubah)
         if ($request->title != $project->title) {

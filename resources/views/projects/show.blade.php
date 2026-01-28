@@ -56,7 +56,7 @@
                             <div>
                                 <span class="text-gray-500 text-xs uppercase tracking-wider font-semibold block mb-1">My
                                     Role</span>
-                                <p class="text-white font-medium">Fullstack Developer</p>
+                                <p class="text-white font-medium">{{ $project->role ?? 'Developer' }}</p>
                             </div>
 
                             {{-- Context (Tipe Project) --}}
@@ -64,26 +64,27 @@
                                 <div>
                                     <span
                                         class="text-gray-500 text-xs uppercase tracking-wider font-semibold block mb-1">Type</span>
-                                    <p class="text-gray-300 text-sm">Personal Project</p>
+                                    <p class="text-gray-300 text-sm">{{ $project->project_type ?? 'Personal Project' }}</p>
                                 </div>
                                 <div>
                                     <span
                                         class="text-gray-500 text-xs uppercase tracking-wider font-semibold block mb-1">Year</span>
-                                    <p class="text-gray-300 text-sm">{{ $project->created_at->format('Y') }}</p>
+                                    <p class="text-gray-300 text-sm">
+                                        {{ $project->year ?? $project->created_at->format('Y') }}</p>
                                 </div>
                             </div>
 
-                            {{-- Team & Duration (Bisa kamu buat dinamis nanti) --}}
+                            {{-- Team & Duration --}}
                             <div class="grid grid-cols-2 gap-4 border-t border-gray-800 pt-4">
                                 <div>
                                     <span
                                         class="text-gray-500 text-xs uppercase tracking-wider font-semibold block mb-1">Team</span>
-                                    <p class="text-gray-300 text-sm">Solo Project</p>
+                                    <p class="text-gray-300 text-sm">{{ $project->team ?? 'Solo Project' }}</p>
                                 </div>
                                 <div>
                                     <span
                                         class="text-gray-500 text-xs uppercase tracking-wider font-semibold block mb-1">Timeline</span>
-                                    <p class="text-gray-300 text-sm">~ 3 Weeks</p>
+                                    <p class="text-gray-300 text-sm">{{ $project->timeline ?? '-' }}</p>
                                 </div>
                             </div>
 
@@ -190,7 +191,7 @@
                     if (count($features) > 0) {
                         if (isset($features[0]) && is_string($features[0])) {
                             $features = array_map(
-                                fn($f) => ['title' => $f, 'icon' => 'fas fa-star', 'description' => ''],
+                                fn($f) => ['title' => $f, 'icon' => 'fa-solid fa-star', 'description' => ''],
                                 $features,
                             );
                         }

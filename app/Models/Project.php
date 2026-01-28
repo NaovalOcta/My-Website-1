@@ -20,6 +20,11 @@ class Project extends Model
         'github_link',
         'design_link',
         'features',
+        'role',
+        'project_type',
+        'year',
+        'team',
+        'timeline',
     ];
 
     protected $casts = [
