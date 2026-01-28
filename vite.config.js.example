@@ -5,7 +5,7 @@ import fs from "fs"; // <--- Import file system module bawaan Node.js
 
 // Sesuaikan path ini dengan lokasi instalasi Laragon Anda
 // Perhatikan penggunaan garis miring (/) bukan backslash (\) agar aman
-const host = "naoval-octa.test";
+const host = "my-website-1.test";
 const certPath = "C:/laragon/etc/ssl/laragon.crt";
 const keyPath = "C:/laragon/etc/ssl/laragon.key";
 
