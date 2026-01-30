@@ -34,46 +34,51 @@
                 @csrf
                 @method('PUT')
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {{-- TITLE --}}
-                    <div class="space-y-2">
-                        <label class="text-sm font-medium text-gray-300">
-                            Project Title <span class="text-red-400">*</span>
-                        </label>
-                        <input type="text" name="title" value="{{ old('title', $project->title) }}"
-                            class="w-full bg-gray-900 border rounded-lg p-3 text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition @error('title') border-red-500 @else border-gray-700 @enderror"
-                            placeholder="e.g. My Awesome App">
-                        @error('title')
-                            <p class="text-xs text-red-400 flex items-center gap-1">
-                                <i class="fas fa-exclamation-circle"></i> {{ $message }}
-                            </p>
-                        @enderror
-                    </div>
+                {{-- BASIC INFO SECTION --}}
+                <div class="p-5 bg-gray-800/30 rounded-xl border border-gray-700/50 space-y-4">
+                    <h3 class="text-sm font-bold text-primary uppercase tracking-wider">Basic Info</h3>
 
-                    {{-- CATEGORY --}}
-                    <div class="space-y-2">
-                        <label class="text-sm font-medium text-gray-300">
-                            Category <span class="text-red-400">*</span>
-                        </label>
-                        <select name="category"
-                            class="w-full bg-gray-900 border rounded-lg p-3 text-white focus:border-primary outline-none transition @error('category') border-red-500 @else border-gray-700 @enderror">
-                            <option value="Web Development"
-                                {{ old('category', $project->category) == 'Web Development' ? 'selected' : '' }}>Web
-                                Development</option>
-                            <option value="Mobile App"
-                                {{ old('category', $project->category) == 'Mobile App' ? 'selected' : '' }}>Mobile App
-                            </option>
-                            <option value="UI/UX Design"
-                                {{ old('category', $project->category) == 'UI/UX Design' ? 'selected' : '' }}>UI/UX Design
-                            </option>
-                            <option value="IoT" {{ old('category', $project->category) == 'IoT' ? 'selected' : '' }}>IoT
-                            </option>
-                        </select>
-                        @error('category')
-                            <p class="text-xs text-red-400 flex items-center gap-1">
-                                <i class="fas fa-exclamation-circle"></i> {{ $message }}
-                            </p>
-                        @enderror
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {{-- TITLE --}}
+                        <div class="space-y-1">
+                            <label class="text-xs text-gray-400">
+                                Project Title <span class="text-red-400">*</span>
+                            </label>
+                            <input type="text" name="title" value="{{ old('title', $project->title) }}"
+                                class="w-full bg-gray-900 border rounded-md p-2 text-sm text-white focus:border-primary outline-none transition @error('title') border-red-500 @else border-gray-700 @enderror"
+                                placeholder="e.g. My Awesome App">
+                            @error('title')
+                                <p class="text-xs text-red-400 flex items-center gap-1">
+                                    <i class="fas fa-exclamation-circle"></i> {{ $message }}
+                                </p>
+                            @enderror
+                        </div>
+
+                        {{-- CATEGORY --}}
+                        <div class="space-y-1">
+                            <label class="text-xs text-gray-400">
+                                Category <span class="text-red-400">*</span>
+                            </label>
+                            <select name="category"
+                                class="w-full bg-gray-900 border rounded-md p-2 text-sm text-white focus:border-primary outline-none transition @error('category') border-red-500 @else border-gray-700 @enderror">
+                                <option value="Web Development"
+                                    {{ old('category', $project->category) == 'Web Development' ? 'selected' : '' }}>Web
+                                    Development</option>
+                                <option value="Mobile App"
+                                    {{ old('category', $project->category) == 'Mobile App' ? 'selected' : '' }}>Mobile App
+                                </option>
+                                <option value="UI/UX Design"
+                                    {{ old('category', $project->category) == 'UI/UX Design' ? 'selected' : '' }}>UI/UX
+                                    Design</option>
+                                <option value="IoT" {{ old('category', $project->category) == 'IoT' ? 'selected' : '' }}>
+                                    IoT</option>
+                            </select>
+                            @error('category')
+                                <p class="text-xs text-red-400 flex items-center gap-1">
+                                    <i class="fas fa-exclamation-circle"></i> {{ $message }}
+                                </p>
+                            @enderror
+                        </div>
                     </div>
                 </div>
 
@@ -188,284 +193,298 @@
                             @enderror
                         </div>
                     </div>
-                </div>
-                <div class="space-y-2">
-                    <label class="text-sm font-medium text-gray-300">
-                        The Challenge (Description) <span class="text-red-400">*</span>
-                    </label>
-                    <textarea name="description" rows="5"
-                        class="w-full bg-gray-900 border rounded-lg p-3 text-white focus:border-primary outline-none transition @error('description') border-red-500 @else border-gray-700 @enderror"
-                        placeholder="Describe the problem and your solution...">{{ old('description', $project->description) }}</textarea>
-                    @error('description')
-                        <p class="text-xs text-red-400 flex items-center gap-1">
-                            <i class="fas fa-exclamation-circle"></i> {{ $message }}
-                        </p>
-                    @enderror
-                </div>
 
-                {{-- TECHNOLOGIES --}}
-                <div class="space-y-2">
-                    <label class="text-sm font-medium text-gray-300">
-                        Built With (Technologies) <span class="text-red-400">*</span>
-                    </label>
-                    <input type="text" name="tech"
-                        value="{{ old('tech', is_array($project->tech) ? implode(', ', $project->tech) : $project->tech) }}"
-                        class="w-full bg-gray-900 border rounded-lg p-3 text-white focus:border-primary outline-none transition @error('tech') border-red-500 @else border-gray-700 @enderror"
-                        placeholder="Laravel, Tailwind, MySQL (Comma separated)">
-                    @error('tech')
-                        <p class="text-xs text-red-400 flex items-center gap-1">
-                            <i class="fas fa-exclamation-circle"></i> {{ $message }}
-                        </p>
-                    @enderror
-                </div>
+                    {{-- CONTENT SECTION --}}
+                    <div class="p-5 bg-gray-800/30 rounded-xl border border-gray-700/50 space-y-4">
+                        <h3 class="text-sm font-bold text-primary uppercase tracking-wider">Content</h3>
 
-                {{-- FEATURES --}}
-                <div class="space-y-4">
-                    <div class="flex justify-between items-center">
-                        <div>
-                            <label class="text-sm font-medium text-gray-300">Key Features</label>
-                            <p class="text-xs text-gray-500 mt-1">Tambahkan fitur utama project beserta icon dan deskripsi
-                            </p>
+                        {{-- DESCRIPTION --}}
+                        <div class="space-y-1">
+                            <label class="text-xs text-gray-400">
+                                The Challenge (Description) <span class="text-red-400">*</span>
+                            </label>
+                            <textarea name="description" rows="4"
+                                class="w-full bg-gray-900 border rounded-md p-2 text-sm text-white focus:border-primary outline-none transition @error('description') border-red-500 @else border-gray-700 @enderror"
+                                placeholder="Describe the problem and your solution...">{{ old('description', $project->description) }}</textarea>
+                            @error('description')
+                                <p class="text-xs text-red-400 flex items-center gap-1">
+                                    <i class="fas fa-exclamation-circle"></i> {{ $message }}
+                                </p>
+                            @enderror
                         </div>
-                        <button type="button" onclick="addFeature()"
-                            class="text-xs bg-gray-800 hover:bg-gray-700 text-primary px-3 py-1.5 rounded border border-gray-700 transition flex items-center gap-1">
-                            <i class="fas fa-plus"></i> Add Feature
-                        </button>
+
+                        {{-- TECHNOLOGIES --}}
+                        <div class="space-y-1">
+                            <label class="text-xs text-gray-400">
+                                Built With (Technologies) <span class="text-red-400">*</span>
+                            </label>
+                            <input type="text" name="tech"
+                                value="{{ old('tech', is_array($project->tech) ? implode(', ', $project->tech) : $project->tech) }}"
+                                class="w-full bg-gray-900 border rounded-md p-2 text-sm text-white focus:border-primary outline-none transition @error('tech') border-red-500 @else border-gray-700 @enderror"
+                                placeholder="Laravel, Tailwind, MySQL (Comma separated)">
+                            @error('tech')
+                                <p class="text-xs text-red-400 flex items-center gap-1">
+                                    <i class="fas fa-exclamation-circle"></i> {{ $message }}
+                                </p>
+                            @enderror
+                        </div>
                     </div>
 
-                    <div id="features-container" class="space-y-4">
-                        @php
-                            $features = old('features', $project->features ?? []);
-                            if (is_string($features)) {
-                                $features = json_decode($features, true) ?? [];
-                            }
-                            // Handle legacy string array format
-                            if (count($features) > 0 && isset($features[0]) && is_string($features[0])) {
-                                $features = array_map(
-                                    fn($f) => ['title' => $f, 'icon' => 'fas fa-star', 'description' => ''],
-                                    $features,
-                                );
-                            }
-                        @endphp
+                    {{-- FEATURES SECTION --}}
+                    <div class="p-5 bg-gray-800/30 rounded-xl border border-gray-700/50 space-y-4">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <h3 class="text-sm font-bold text-primary uppercase tracking-wider">Key Features</h3>
+                                <p class="text-xs text-gray-500 mt-1">Tambahkan fitur utama project beserta icon dan
+                                    deskripsi</p>
+                            </div>
+                            <button type="button" onclick="addFeature()"
+                                class="text-xs bg-gray-700 hover:bg-gray-600 text-primary px-3 py-1.5 rounded-md border border-gray-600 transition flex items-center gap-1">
+                                <i class="fas fa-plus"></i> Add Feature
+                            </button>
+                        </div>
 
-                        @if (count($features) > 0)
-                            @foreach ($features as $index => $feature)
-                                <div class="feature-item bg-gray-800/50 rounded-xl p-4 border border-gray-700 relative">
-                                    @if ($index > 0)
-                                        <button type="button" onclick="this.closest('.feature-item').remove()"
-                                            class="absolute top-2 right-2 text-red-500 hover:text-red-400 transition text-sm">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    @endif
+                        <div id="features-container" class="space-y-3">
+                            @php
+                                $features = old('features', $project->features ?? []);
+                                if (is_string($features)) {
+                                    $features = json_decode($features, true) ?? [];
+                                }
+                                // Handle legacy string array format
+                                if (count($features) > 0 && isset($features[0]) && is_string($features[0])) {
+                                    $features = array_map(
+                                        fn($f) => ['title' => $f, 'icon' => 'fas fa-star', 'description' => ''],
+                                        $features,
+                                    );
+                                }
+                            @endphp
+
+                            @if (count($features) > 0)
+                                @foreach ($features as $index => $feature)
+                                    <div
+                                        class="feature-item bg-gray-900/50 rounded-lg p-3 border border-gray-700 relative">
+                                        @if ($index > 0)
+                                            <button type="button" onclick="this.closest('.feature-item').remove()"
+                                                class="absolute top-2 right-2 text-red-500 hover:text-red-400 transition text-sm">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        @endif
+                                        <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
+                                            {{-- Icon Input --}}
+                                            <div class="md:col-span-3 space-y-1">
+                                                <label class="text-xs text-gray-400">Icon (FontAwesome)</label>
+                                                <div class="relative">
+                                                    <span class="absolute left-3 top-2 text-gray-500">
+                                                        <i class="{{ $feature['icon'] ?? 'fa-solid fa-star' }}"
+                                                            id="iconPreview{{ $index }}"></i>
+                                                    </span>
+                                                    <input type="text" name="features[{{ $index }}][icon]"
+                                                        value="{{ $feature['icon'] ?? 'fa-solid fa-star' }}"
+                                                        class="w-full bg-gray-900 border border-gray-700 rounded-md pl-10 pr-3 py-2 text-white text-sm focus:border-primary outline-none"
+                                                        placeholder="fa-solid fa-bolt"
+                                                        oninput="updateIconPreview(this, 'iconPreview{{ $index }}')">
+                                                </div>
+                                            </div>
+                                            {{-- Title Input --}}
+                                            <div class="md:col-span-4 space-y-1">
+                                                <label class="text-xs text-gray-400">Feature Title</label>
+                                                <input type="text" name="features[{{ $index }}][title]"
+                                                    value="{{ $feature['title'] ?? '' }}"
+                                                    class="w-full bg-gray-900 border border-gray-700 rounded-md p-2 text-white text-sm focus:border-primary outline-none"
+                                                    placeholder="e.g. Fast Performance">
+                                            </div>
+                                            {{-- Description Input --}}
+                                            <div class="md:col-span-5 space-y-1">
+                                                <label class="text-xs text-gray-400">Description</label>
+                                                <input type="text" name="features[{{ $index }}][description]"
+                                                    value="{{ $feature['description'] ?? '' }}"
+                                                    class="w-full bg-gray-900 border border-gray-700 rounded-md p-2 text-white text-sm focus:border-primary outline-none"
+                                                    placeholder="Short description...">
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @else
+                                <div class="feature-item bg-gray-900/50 rounded-lg p-3 border border-gray-700 relative">
                                     <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
                                         {{-- Icon Input --}}
                                         <div class="md:col-span-3 space-y-1">
                                             <label class="text-xs text-gray-400">Icon (FontAwesome)</label>
                                             <div class="relative">
-                                                <span class="absolute left-3 top-2.5 text-gray-500">
-                                                    <i class="{{ $feature['icon'] ?? 'fa-solid fa-star' }}"
-                                                        id="iconPreview{{ $index }}"></i>
+                                                <span class="absolute left-3 top-2 text-gray-500">
+                                                    <i class="fa-solid fa-star" id="iconPreview0"></i>
                                                 </span>
-                                                <input type="text" name="features[{{ $index }}][icon]"
-                                                    value="{{ $feature['icon'] ?? 'fa-solid fa-star' }}"
-                                                    class="w-full bg-gray-900 border border-gray-700 rounded-lg pl-10 pr-3 py-2 text-white text-sm focus:border-primary outline-none"
+                                                <input type="text" name="features[0][icon]" value="fa-solid fa-star"
+                                                    class="w-full bg-gray-900 border border-gray-700 rounded-md pl-10 pr-3 py-2 text-white text-sm focus:border-primary outline-none"
                                                     placeholder="fa-solid fa-bolt"
-                                                    oninput="updateIconPreview(this, 'iconPreview{{ $index }}')">
+                                                    oninput="updateIconPreview(this, 'iconPreview0')">
                                             </div>
                                         </div>
                                         {{-- Title Input --}}
                                         <div class="md:col-span-4 space-y-1">
                                             <label class="text-xs text-gray-400">Feature Title</label>
-                                            <input type="text" name="features[{{ $index }}][title]"
-                                                value="{{ $feature['title'] ?? '' }}"
-                                                class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2 text-white text-sm focus:border-primary outline-none"
+                                            <input type="text" name="features[0][title]"
+                                                class="w-full bg-gray-900 border border-gray-700 rounded-md p-2 text-white text-sm focus:border-primary outline-none"
                                                 placeholder="e.g. Fast Performance">
                                         </div>
                                         {{-- Description Input --}}
                                         <div class="md:col-span-5 space-y-1">
                                             <label class="text-xs text-gray-400">Description</label>
-                                            <input type="text" name="features[{{ $index }}][description]"
-                                                value="{{ $feature['description'] ?? '' }}"
-                                                class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2 text-white text-sm focus:border-primary outline-none"
+                                            <input type="text" name="features[0][description]"
+                                                class="w-full bg-gray-900 border border-gray-700 rounded-md p-2 text-white text-sm focus:border-primary outline-none"
                                                 placeholder="Short description...">
                                         </div>
                                     </div>
                                 </div>
-                            @endforeach
-                        @else
-                            <div class="feature-item bg-gray-800/50 rounded-xl p-4 border border-gray-700 relative">
-                                <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
-                                    {{-- Icon Input --}}
-                                    <div class="md:col-span-3 space-y-1">
-                                        <label class="text-xs text-gray-400">Icon (FontAwesome)</label>
-                                        <div class="relative">
-                                            <span class="absolute left-3 top-2.5 text-gray-500">
-                                                <i class="fa-solid fa-star" id="iconPreview0"></i>
-                                            </span>
-                                            <input type="text" name="features[0][icon]" value="fa-solid fa-star"
-                                                class="w-full bg-gray-900 border border-gray-700 rounded-lg pl-10 pr-3 py-2 text-white text-sm focus:border-primary outline-none"
-                                                placeholder="fa-solid fa-bolt"
-                                                oninput="updateIconPreview(this, 'iconPreview0')">
-                                        </div>
-                                    </div>
-                                    {{-- Title Input --}}
-                                    <div class="md:col-span-4 space-y-1">
-                                        <label class="text-xs text-gray-400">Feature Title</label>
-                                        <input type="text" name="features[0][title]"
-                                            class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2 text-white text-sm focus:border-primary outline-none"
-                                            placeholder="e.g. Fast Performance">
-                                    </div>
-                                    {{-- Description Input --}}
-                                    <div class="md:col-span-5 space-y-1">
-                                        <label class="text-xs text-gray-400">Description</label>
-                                        <input type="text" name="features[0][description]"
-                                            class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2 text-white text-sm focus:border-primary outline-none"
-                                            placeholder="Short description...">
-                                    </div>
-                                </div>
-                            </div>
-                        @endif
-                    </div>
-
-                    {{-- Icon Suggestions --}}
-                    <div class="bg-gray-900/50 rounded-lg p-3 border border-gray-800">
-                        <p class="text-xs text-gray-400 mb-2"><i class="fa-solid fa-lightbulb text-yellow-500 mr-1"></i>
-                            Icon Suggestions (click to copy):</p>
-                        <div class="flex flex-wrap gap-2">
-                            @foreach (['fa-solid fa-bolt', 'fa-solid fa-shield', 'fa-solid fa-rocket', 'fa-solid fa-gear', 'fa-solid fa-code', 'fa-solid fa-database', 'fa-solid fa-cloud', 'fa-solid fa-lock', 'fa-solid fa-chart-line', 'fa-solid fa-mobile-screen', 'fa-solid fa-palette', 'fa-solid fa-globe'] as $icon)
-                                <button type="button" onclick="copyIcon('{{ $icon }}')"
-                                    class="flex items-center gap-1.5 px-2 py-1 bg-gray-800 hover:bg-gray-700 rounded text-xs text-gray-300 hover:text-white transition border border-gray-700">
-                                    <i class="{{ $icon }}"></i>
-                                    <span class="hidden sm:inline">{{ $icon }}</span>
-                                </button>
-                            @endforeach
+                            @endif
                         </div>
-                        <p class="text-xs text-gray-500 mt-2">
-                            Browse more icons at <a href="https://fontawesome.com/icons" target="_blank"
-                                class="text-primary hover:underline">fontawesome.com/icons</a>
-                        </p>
-                    </div>
-                </div>
 
-                {{-- IMAGE UPLOADS --}}
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {{-- MAIN THUMBNAIL --}}
-                    <div class="space-y-3">
-                        <label class="text-sm font-medium text-gray-300">
-                            Main Thumbnail <span class="text-red-400">*</span>
-                        </label>
-
-                        {{-- Current Thumbnail --}}
-                        @if ($project->image)
-                            <div class="current-image p-3 bg-gray-800/50 rounded-lg border border-gray-700">
-                                <p class="text-xs text-gray-400 mb-2">Current thumbnail:</p>
-                                <img src="{{ asset('storage/' . $project->image) }}" alt="Current Thumbnail"
-                                    class="max-h-32 rounded-lg border border-gray-600">
+                        {{-- Icon Suggestions --}}
+                        <div class="bg-gray-900/50 rounded-lg p-3 border border-gray-800">
+                            <p class="text-xs text-gray-400 mb-2"><i
+                                    class="fa-solid fa-lightbulb text-yellow-500 mr-1"></i>
+                                Icon Suggestions (click to copy):</p>
+                            <div class="flex flex-wrap gap-2">
+                                @foreach (['fa-solid fa-bolt', 'fa-solid fa-shield', 'fa-solid fa-rocket', 'fa-solid fa-gear', 'fa-solid fa-code', 'fa-solid fa-database', 'fa-solid fa-cloud', 'fa-solid fa-lock', 'fa-solid fa-chart-line', 'fa-solid fa-mobile-screen', 'fa-solid fa-palette', 'fa-solid fa-globe'] as $icon)
+                                    <button type="button" onclick="copyIcon('{{ $icon }}')"
+                                        class="flex items-center gap-1.5 px-2 py-1 bg-gray-800 hover:bg-gray-700 rounded text-xs text-gray-300 hover:text-white transition border border-gray-700">
+                                        <i class="{{ $icon }}"></i>
+                                        <span class="hidden sm:inline">{{ $icon }}</span>
+                                    </button>
+                                @endforeach
                             </div>
-                        @endif
-
-                        <div class="relative">
-                            <input type="file" name="image" id="thumbnailInput" accept="image/*"
-                                class="w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:bg-primary/10 file:text-primary hover:file:bg-primary/20 cursor-pointer transition"
-                                onchange="previewThumbnail(this)">
-                            <p class="text-xs text-gray-500 mt-1">
-                                <i class="fas fa-info-circle mr-1"></i> Kosongkan jika tidak ingin mengubah
+                            <p class="text-xs text-gray-500 mt-2">
+                                Browse more icons at <a href="https://fontawesome.com/icons" target="_blank"
+                                    class="text-primary hover:underline">fontawesome.com/icons</a>
                             </p>
                         </div>
-                        {{-- New Thumbnail Preview --}}
-                        <div id="thumbnailPreview" class="hidden mt-3">
-                            <p class="text-xs text-green-400 mb-2">New thumbnail:</p>
-                            <div class="relative inline-block">
-                                <img id="thumbnailImg" src="" alt="Preview"
-                                    class="max-h-40 rounded-lg border border-green-500/50 shadow-lg">
-                                <button type="button" onclick="clearThumbnail()"
-                                    class="absolute -top-2 -right-2 bg-red-500 hover:bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs transition">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
-                        </div>
-                        @error('image')
-                            <p class="text-xs text-red-400 flex items-center gap-1">
-                                <i class="fas fa-exclamation-circle"></i> {{ $message }}
-                            </p>
-                        @enderror
                     </div>
 
-                    {{-- GALLERY --}}
-                    <div class="space-y-3">
-                        <label class="text-sm font-medium text-gray-300">Project Gallery (Multiple)</label>
+                    {{-- MEDIA SECTION --}}
+                    <div class="p-5 bg-gray-800/30 rounded-xl border border-gray-700/50 space-y-4">
+                        <h3 class="text-sm font-bold text-primary uppercase tracking-wider">Media</h3>
 
-                        {{-- Current Gallery --}}
-                        @if ($project->galleries && $project->galleries->count() > 0)
-                            <div class="current-gallery p-3 bg-gray-800/50 rounded-lg border border-gray-700">
-                                <p class="text-xs text-gray-400 mb-2">Current gallery ({{ $project->galleries->count() }}
-                                    images):</p>
-                                <div class="flex flex-wrap gap-2">
-                                    @foreach ($project->galleries as $gallery)
-                                        <div class="relative group">
-                                            <img src="{{ asset('storage/' . $gallery->image_path) }}" alt="Gallery"
-                                                class="h-16 w-16 object-cover rounded-lg border border-gray-600">
-                                            <div
-                                                class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition rounded-lg flex items-center justify-center">
-                                                <label class="cursor-pointer">
-                                                    <input type="checkbox" name="delete_gallery[]"
-                                                        value="{{ $gallery->id }}" class="sr-only peer">
-                                                    <span class="text-red-400 peer-checked:text-red-500 text-xs">
-                                                        <i class="fas fa-trash"></i>
-                                                    </span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    @endforeach
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            {{-- MAIN THUMBNAIL --}}
+                            <div class="space-y-2">
+                                <label class="text-xs text-gray-400">
+                                    Main Thumbnail <span class="text-red-400">*</span>
+                                </label>
+
+                                {{-- Current Thumbnail --}}
+                                @if ($project->image)
+                                    <div class="current-image p-2 bg-gray-900/50 rounded-md border border-gray-700">
+                                        <p class="text-xs text-gray-500 mb-2">Current thumbnail:</p>
+                                        <img src="{{ asset('storage/' . $project->image) }}" alt="Current Thumbnail"
+                                            class="max-h-24 rounded-md border border-gray-600">
+                                    </div>
+                                @endif
+
+                                <div class="relative">
+                                    <input type="file" name="image" id="thumbnailInput" accept="image/*"
+                                        class="w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:bg-primary/10 file:text-primary hover:file:bg-primary/20 cursor-pointer transition"
+                                        onchange="previewThumbnail(this)">
+                                    <p class="text-xs text-gray-500 mt-1">
+                                        <i class="fas fa-info-circle mr-1"></i> Kosongkan jika tidak ingin mengubah
+                                    </p>
                                 </div>
-                                <p class="text-xs text-gray-500 mt-2">
-                                    <i class="fas fa-info-circle mr-1"></i> Hover & click untuk menandai yang akan dihapus
+                                {{-- New Thumbnail Preview --}}
+                                <div id="thumbnailPreview" class="hidden mt-2">
+                                    <p class="text-xs text-green-400 mb-2">New thumbnail:</p>
+                                    <div class="relative inline-block">
+                                        <img id="thumbnailImg" src="" alt="Preview"
+                                            class="max-h-24 rounded-md border border-green-500/50 shadow-lg">
+                                        <button type="button" onclick="clearThumbnail()"
+                                            class="absolute -top-2 -right-2 bg-red-500 hover:bg-red-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs transition">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                @error('image')
+                                    <p class="text-xs text-red-400 flex items-center gap-1">
+                                        <i class="fas fa-exclamation-circle"></i> {{ $message }}
+                                    </p>
+                                @enderror
+                            </div>
+
+                            {{-- GALLERY --}}
+                            <div class="space-y-2">
+                                <label class="text-xs text-gray-400">Project Gallery (Multiple)</label>
+
+                                {{-- Current Gallery --}}
+                                @if ($project->galleries && $project->galleries->count() > 0)
+                                    <div class="current-gallery p-2 bg-gray-900/50 rounded-md border border-gray-700">
+                                        <p class="text-xs text-gray-500 mb-2">Current gallery
+                                            ({{ $project->galleries->count() }} images):</p>
+                                        <div class="flex flex-wrap gap-2">
+                                            @foreach ($project->galleries as $gallery)
+                                                <div class="relative group">
+                                                    <img src="{{ asset('storage/' . $gallery->image_path) }}"
+                                                        alt="Gallery"
+                                                        class="h-12 w-12 object-cover rounded-md border border-gray-600">
+                                                    <div
+                                                        class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition rounded-md flex items-center justify-center">
+                                                        <label class="cursor-pointer">
+                                                            <input type="checkbox" name="delete_gallery[]"
+                                                                value="{{ $gallery->id }}" class="sr-only peer">
+                                                            <span class="text-red-400 peer-checked:text-red-500 text-xs">
+                                                                <i class="fas fa-trash"></i>
+                                                            </span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                        <p class="text-xs text-gray-500 mt-2">
+                                            <i class="fas fa-info-circle mr-1"></i> Hover & click untuk menandai yang akan
+                                            dihapus
+                                        </p>
+                                    </div>
+                                @endif
+
+                                <input type="file" name="gallery[]" id="galleryInput" multiple accept="image/*"
+                                    class="w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:bg-gray-700 file:text-white hover:file:bg-gray-600 cursor-pointer transition"
+                                    onchange="previewGallery(this)">
+                                <p class="text-xs text-gray-500">
+                                    <i class="fas fa-info-circle mr-1"></i> Bisa pilih banyak foto sekaligus (Ctrl + Click)
                                 </p>
+                                {{-- New Gallery Preview --}}
+                                <div id="galleryPreview" class="hidden mt-2">
+                                    <p class="text-xs text-green-400 mb-2">New images to add:</p>
+                                    <div class="flex flex-wrap gap-2" id="galleryContainer"></div>
+                                    <button type="button" onclick="clearGallery()"
+                                        class="mt-2 text-xs text-red-400 hover:text-red-300 transition">
+                                        <i class="fas fa-trash mr-1"></i> Hapus semua gambar baru
+                                    </button>
+                                </div>
+                                @error('gallery')
+                                    <p class="text-xs text-red-400 flex items-center gap-1">
+                                        <i class="fas fa-exclamation-circle"></i> {{ $message }}
+                                    </p>
+                                @enderror
+                                @error('gallery.*')
+                                    <p class="text-xs text-red-400 flex items-center gap-1">
+                                        <i class="fas fa-exclamation-circle"></i> {{ $message }}
+                                    </p>
+                                @enderror
                             </div>
-                        @endif
-
-                        <input type="file" name="gallery[]" id="galleryInput" multiple accept="image/*"
-                            class="w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:bg-gray-800 file:text-white hover:file:bg-gray-700 cursor-pointer transition"
-                            onchange="previewGallery(this)">
-                        <p class="text-xs text-gray-500">
-                            <i class="fas fa-info-circle mr-1"></i> Bisa pilih banyak foto sekaligus (Ctrl + Click)
-                        </p>
-                        {{-- New Gallery Preview --}}
-                        <div id="galleryPreview" class="hidden mt-3">
-                            <p class="text-xs text-green-400 mb-2">New images to add:</p>
-                            <div class="flex flex-wrap gap-2" id="galleryContainer"></div>
-                            <button type="button" onclick="clearGallery()"
-                                class="mt-2 text-xs text-red-400 hover:text-red-300 transition">
-                                <i class="fas fa-trash mr-1"></i> Hapus semua gambar baru
-                            </button>
                         </div>
-                        @error('gallery')
-                            <p class="text-xs text-red-400 flex items-center gap-1">
-                                <i class="fas fa-exclamation-circle"></i> {{ $message }}
-                            </p>
-                        @enderror
-                        @error('gallery.*')
-                            <p class="text-xs text-red-400 flex items-center gap-1">
-                                <i class="fas fa-exclamation-circle"></i> {{ $message }}
-                            </p>
-                        @enderror
                     </div>
-                </div>
 
-                {{-- ACTION BUTTONS --}}
-                <div class="pt-6 border-t border-gray-800 flex justify-between items-center">
-                    <a href="{{ route('admin.projects.index') }}"
-                        class="text-gray-400 hover:text-white px-6 py-3 rounded-lg border border-gray-700 hover:border-gray-600 transition flex items-center gap-2">
-                        <i class="fas fa-arrow-left"></i> Cancel
-                    </a>
-                    <button type="submit" id="submitBtn"
-                        class="bg-primary hover:bg-orange-600 text-white px-8 py-3 rounded-lg font-bold shadow-lg shadow-primary/20 transition transform hover:scale-105 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none">
-                        <span id="submitText"><i class="fas fa-save mr-1"></i> Update Project</span>
-                        <span id="submitLoader" class="hidden">
-                            <i class="fas fa-spinner fa-spin"></i> Updating...
-                        </span>
-                    </button>
-                </div>
+                    {{-- ACTION BUTTONS --}}
+                    <div class="pt-6 border-t border-gray-800 flex justify-between items-center">
+                        <a href="{{ route('admin.projects.index') }}"
+                            class="text-gray-400 hover:text-white px-6 py-3 rounded-lg border border-gray-700 hover:border-gray-600 transition flex items-center gap-2">
+                            <i class="fas fa-arrow-left"></i> Cancel
+                        </a>
+                        <button type="submit" id="submitBtn"
+                            class="bg-primary hover:bg-orange-600 text-white px-8 py-3 rounded-lg font-bold shadow-lg shadow-primary/20 transition transform hover:scale-105 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none">
+                            <span id="submitText"><i class="fas fa-save mr-1"></i> Update Project</span>
+                            <span id="submitLoader" class="hidden">
+                                <i class="fas fa-spinner fa-spin"></i> Updating...
+                            </span>
+                        </button>
+                    </div>
             </form>
         </div>
     </div>

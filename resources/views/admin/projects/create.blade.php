@@ -33,41 +33,46 @@
                 class="space-y-8" id="projectForm">
                 @csrf
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {{-- TITLE --}}
-                    <div class="space-y-2">
-                        <label class="text-sm font-medium text-gray-300">
-                            Project Title <span class="text-red-400">*</span>
-                        </label>
-                        <input type="text" name="title" value="{{ old('title') }}"
-                            class="w-full bg-gray-900 border rounded-lg p-3 text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition @error('title') border-red-500 @else border-gray-700 @enderror"
-                            placeholder="e.g. My Awesome App">
-                        @error('title')
-                            <p class="text-xs text-red-400 flex items-center gap-1">
-                                <i class="fas fa-exclamation-circle"></i> {{ $message }}
-                            </p>
-                        @enderror
-                    </div>
+                {{-- BASIC INFO SECTION --}}
+                <div class="p-5 bg-gray-800/30 rounded-xl border border-gray-700/50 space-y-4">
+                    <h3 class="text-sm font-bold text-primary uppercase tracking-wider">Basic Info</h3>
 
-                    {{-- CATEGORY --}}
-                    <div class="space-y-2">
-                        <label class="text-sm font-medium text-gray-300">
-                            Category <span class="text-red-400">*</span>
-                        </label>
-                        <select name="category"
-                            class="w-full bg-gray-900 border rounded-lg p-3 text-white focus:border-primary outline-none transition @error('category') border-red-500 @else border-gray-700 @enderror">
-                            <option value="Web Development" {{ old('category') == 'Web Development' ? 'selected' : '' }}>Web
-                                Development</option>
-                            <option value="Mobile App" {{ old('category') == 'Mobile App' ? 'selected' : '' }}>Mobile App
-                            </option>
-                            <option value="UI/UX Design" {{ old('category') == 'UI/UX Design' ? 'selected' : '' }}>UI/UX
-                                Design</option>
-                        </select>
-                        @error('category')
-                            <p class="text-xs text-red-400 flex items-center gap-1">
-                                <i class="fas fa-exclamation-circle"></i> {{ $message }}
-                            </p>
-                        @enderror
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {{-- TITLE --}}
+                        <div class="space-y-1">
+                            <label class="text-xs text-gray-400">
+                                Project Title <span class="text-red-400">*</span>
+                            </label>
+                            <input type="text" name="title" value="{{ old('title') }}"
+                                class="w-full bg-gray-900 border rounded-md p-2 text-sm text-white focus:border-primary outline-none transition @error('title') border-red-500 @else border-gray-700 @enderror"
+                                placeholder="e.g. My Awesome App">
+                            @error('title')
+                                <p class="text-xs text-red-400 flex items-center gap-1">
+                                    <i class="fas fa-exclamation-circle"></i> {{ $message }}
+                                </p>
+                            @enderror
+                        </div>
+
+                        {{-- CATEGORY --}}
+                        <div class="space-y-1">
+                            <label class="text-xs text-gray-400">
+                                Category <span class="text-red-400">*</span>
+                            </label>
+                            <select name="category"
+                                class="w-full bg-gray-900 border rounded-md p-2 text-sm text-white focus:border-primary outline-none transition @error('category') border-red-500 @else border-gray-700 @enderror">
+                                <option value="Web Development"
+                                    {{ old('category') == 'Web Development' ? 'selected' : '' }}>Web Development</option>
+                                <option value="Mobile App" {{ old('category') == 'Mobile App' ? 'selected' : '' }}>Mobile
+                                    App</option>
+                                <option value="UI/UX Design" {{ old('category') == 'UI/UX Design' ? 'selected' : '' }}>UI/UX
+                                    Design</option>
+                            </select>
+                            @error('category')
+                                <p class="text-xs text-red-400 flex items-center gap-1">
+                                    <i class="fas fa-exclamation-circle"></i> {{ $message }}
+                                </p>
+                            @enderror
+                        </div>
                     </div>
                 </div>
 
@@ -180,54 +185,59 @@
                     </div>
                 </div>
 
-                {{-- DESCRIPTION --}}
-                <div class="space-y-2">
-                    <label class="text-sm font-medium text-gray-300">
-                        The Challenge (Description) <span class="text-red-400">*</span>
-                    </label>
-                    <textarea name="description" rows="5"
-                        class="w-full bg-gray-900 border rounded-lg p-3 text-white focus:border-primary outline-none transition @error('description') border-red-500 @else border-gray-700 @enderror"
-                        placeholder="Describe the problem and your solution...">{{ old('description') }}</textarea>
-                    @error('description')
-                        <p class="text-xs text-red-400 flex items-center gap-1">
-                            <i class="fas fa-exclamation-circle"></i> {{ $message }}
-                        </p>
-                    @enderror
+                {{-- CONTENT SECTION --}}
+                <div class="p-5 bg-gray-800/30 rounded-xl border border-gray-700/50 space-y-4">
+                    <h3 class="text-sm font-bold text-primary uppercase tracking-wider">Content</h3>
+
+                    {{-- DESCRIPTION --}}
+                    <div class="space-y-1">
+                        <label class="text-xs text-gray-400">
+                            The Challenge (Description) <span class="text-red-400">*</span>
+                        </label>
+                        <textarea name="description" rows="4"
+                            class="w-full bg-gray-900 border rounded-md p-2 text-sm text-white focus:border-primary outline-none transition @error('description') border-red-500 @else border-gray-700 @enderror"
+                            placeholder="Describe the problem and your solution...">{{ old('description') }}</textarea>
+                        @error('description')
+                            <p class="text-xs text-red-400 flex items-center gap-1">
+                                <i class="fas fa-exclamation-circle"></i> {{ $message }}
+                            </p>
+                        @enderror
+                    </div>
+
+                    {{-- TECHNOLOGIES --}}
+                    <div class="space-y-1">
+                        <label class="text-xs text-gray-400">
+                            Built With (Technologies) <span class="text-red-400">*</span>
+                        </label>
+                        <input type="text" name="tech" value="{{ old('tech') }}"
+                            class="w-full bg-gray-900 border rounded-md p-2 text-sm text-white focus:border-primary outline-none transition @error('tech') border-red-500 @else border-gray-700 @enderror"
+                            placeholder="Laravel, Tailwind, MySQL (Comma separated)">
+                        @error('tech')
+                            <p class="text-xs text-red-400 flex items-center gap-1">
+                                <i class="fas fa-exclamation-circle"></i> {{ $message }}
+                            </p>
+                        @enderror
+                    </div>
                 </div>
 
-                {{-- TECHNOLOGIES --}}
-                <div class="space-y-2">
-                    <label class="text-sm font-medium text-gray-300">
-                        Built With (Technologies) <span class="text-red-400">*</span>
-                    </label>
-                    <input type="text" name="tech" value="{{ old('tech') }}"
-                        class="w-full bg-gray-900 border rounded-lg p-3 text-white focus:border-primary outline-none transition @error('tech') border-red-500 @else border-gray-700 @enderror"
-                        placeholder="Laravel, Tailwind, MySQL (Comma separated)">
-                    @error('tech')
-                        <p class="text-xs text-red-400 flex items-center gap-1">
-                            <i class="fas fa-exclamation-circle"></i> {{ $message }}
-                        </p>
-                    @enderror
-                </div>
-
-                {{-- FEATURES --}}
-                <div class="space-y-4">
+                {{-- FEATURES SECTION --}}
+                <div class="p-5 bg-gray-800/30 rounded-xl border border-gray-700/50 space-y-4">
                     <div class="flex justify-between items-center">
                         <div>
-                            <label class="text-sm font-medium text-gray-300">Key Features</label>
+                            <h3 class="text-sm font-bold text-primary uppercase tracking-wider">Key Features</h3>
                             <p class="text-xs text-gray-500 mt-1">Tambahkan fitur utama project beserta icon dan deskripsi
                             </p>
                         </div>
                         <button type="button" onclick="addFeature()"
-                            class="text-xs bg-gray-800 hover:bg-gray-700 text-primary px-3 py-1.5 rounded border border-gray-700 transition flex items-center gap-1">
+                            class="text-xs bg-gray-700 hover:bg-gray-600 text-primary px-3 py-1.5 rounded-md border border-gray-600 transition flex items-center gap-1">
                             <i class="fas fa-plus"></i> Add Feature
                         </button>
                     </div>
 
-                    <div id="features-container" class="space-y-4">
+                    <div id="features-container" class="space-y-3">
                         @if (old('features'))
                             @foreach (old('features') as $index => $feature)
-                                <div class="feature-item bg-gray-800/50 rounded-xl p-4 border border-gray-700 relative">
+                                <div class="feature-item bg-gray-900/50 rounded-lg p-3 border border-gray-700 relative">
                                     @if ($index > 0)
                                         <button type="button" onclick="this.closest('.feature-item').remove()"
                                             class="absolute top-2 right-2 text-red-500 hover:text-red-400 transition text-sm">
@@ -239,13 +249,13 @@
                                         <div class="md:col-span-3 space-y-1">
                                             <label class="text-xs text-gray-400">Icon (FontAwesome)</label>
                                             <div class="relative">
-                                                <span class="absolute left-3 top-2.5 text-gray-500">
+                                                <span class="absolute left-3 top-2 text-gray-500">
                                                     <i class="{{ $feature['icon'] ?? 'fa-solid fa-star' }}"
                                                         id="iconPreview{{ $index }}"></i>
                                                 </span>
                                                 <input type="text" name="features[{{ $index }}][icon]"
                                                     value="{{ $feature['icon'] ?? 'fa-solid fa-star' }}"
-                                                    class="w-full bg-gray-900 border border-gray-700 rounded-lg pl-10 pr-3 py-2 text-white text-sm focus:border-primary outline-none"
+                                                    class="w-full bg-gray-900 border border-gray-700 rounded-md pl-10 pr-3 py-2 text-white text-sm focus:border-primary outline-none"
                                                     placeholder="fas fa-bolt"
                                                     oninput="updateIconPreview(this, 'iconPreview{{ $index }}')">
                                             </div>
@@ -255,7 +265,7 @@
                                             <label class="text-xs text-gray-400">Feature Title</label>
                                             <input type="text" name="features[{{ $index }}][title]"
                                                 value="{{ $feature['title'] ?? '' }}"
-                                                class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2 text-white text-sm focus:border-primary outline-none"
+                                                class="w-full bg-gray-900 border border-gray-700 rounded-md p-2 text-white text-sm focus:border-primary outline-none"
                                                 placeholder="e.g. Fast Performance">
                                         </div>
                                         {{-- Description Input --}}
@@ -263,24 +273,24 @@
                                             <label class="text-xs text-gray-400">Description</label>
                                             <input type="text" name="features[{{ $index }}][description]"
                                                 value="{{ $feature['description'] ?? '' }}"
-                                                class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2 text-white text-sm focus:border-primary outline-none"
+                                                class="w-full bg-gray-900 border border-gray-700 rounded-md p-2 text-white text-sm focus:border-primary outline-none"
                                                 placeholder="Short description...">
                                         </div>
                                     </div>
                                 </div>
                             @endforeach
                         @else
-                            <div class="feature-item bg-gray-800/50 rounded-xl p-4 border border-gray-700 relative">
+                            <div class="feature-item bg-gray-900/50 rounded-lg p-3 border border-gray-700 relative">
                                 <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
                                     {{-- Icon Input --}}
                                     <div class="md:col-span-3 space-y-1">
                                         <label class="text-xs text-gray-400">Icon (FontAwesome)</label>
                                         <div class="relative">
-                                            <span class="absolute left-3 top-2.5 text-gray-500">
+                                            <span class="absolute left-3 top-2 text-gray-500">
                                                 <i class="fa-solid fa-star" id="iconPreview0"></i>
                                             </span>
                                             <input type="text" name="features[0][icon]" value="fa-solid fa-star"
-                                                class="w-full bg-gray-900 border border-gray-700 rounded-lg pl-10 pr-3 py-2 text-white text-sm focus:border-primary outline-none"
+                                                class="w-full bg-gray-900 border border-gray-700 rounded-md pl-10 pr-3 py-2 text-white text-sm focus:border-primary outline-none"
                                                 placeholder="fa-solid fa-bolt"
                                                 oninput="updateIconPreview(this, 'iconPreview0')">
                                         </div>
@@ -289,14 +299,14 @@
                                     <div class="md:col-span-4 space-y-1">
                                         <label class="text-xs text-gray-400">Feature Title</label>
                                         <input type="text" name="features[0][title]"
-                                            class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2 text-white text-sm focus:border-primary outline-none"
+                                            class="w-full bg-gray-900 border border-gray-700 rounded-md p-2 text-white text-sm focus:border-primary outline-none"
                                             placeholder="e.g. Fast Performance">
                                     </div>
                                     {{-- Description Input --}}
                                     <div class="md:col-span-5 space-y-1">
                                         <label class="text-xs text-gray-400">Description</label>
                                         <input type="text" name="features[0][description]"
-                                            class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2 text-white text-sm focus:border-primary outline-none"
+                                            class="w-full bg-gray-900 border border-gray-700 rounded-md p-2 text-white text-sm focus:border-primary outline-none"
                                             placeholder="Short description...">
                                     </div>
                                 </div>
@@ -324,63 +334,67 @@
                     </div>
                 </div>
 
-                {{-- IMAGE UPLOADS --}}
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {{-- MAIN THUMBNAIL --}}
-                    <div class="space-y-3">
-                        <label class="text-sm font-medium text-gray-300">
-                            Main Thumbnail <span class="text-red-400">*</span>
-                        </label>
-                        <div class="relative">
-                            <input type="file" name="image" id="thumbnailInput" accept="image/*"
-                                class="w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:bg-primary/10 file:text-primary hover:file:bg-primary/20 cursor-pointer transition"
-                                onchange="previewThumbnail(this)">
+                {{-- MEDIA SECTION --}}
+                <div class="p-5 bg-gray-800/30 rounded-xl border border-gray-700/50 space-y-4">
+                    <h3 class="text-sm font-bold text-primary uppercase tracking-wider">Media</h3>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {{-- MAIN THUMBNAIL --}}
+                        <div class="space-y-2">
+                            <label class="text-xs text-gray-400">
+                                Main Thumbnail <span class="text-red-400">*</span>
+                            </label>
+                            <div class="relative">
+                                <input type="file" name="image" id="thumbnailInput" accept="image/*"
+                                    class="w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:bg-primary/10 file:text-primary hover:file:bg-primary/20 cursor-pointer transition"
+                                    onchange="previewThumbnail(this)">
+                            </div>
+                            {{-- Thumbnail Preview --}}
+                            <div id="thumbnailPreview" class="hidden mt-2">
+                                <div class="relative inline-block">
+                                    <img id="thumbnailImg" src="" alt="Preview"
+                                        class="max-h-32 rounded-md border border-gray-700 shadow-lg">
+                                    <button type="button" onclick="clearThumbnail()"
+                                        class="absolute -top-2 -right-2 bg-red-500 hover:bg-red-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs transition">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            @error('image')
+                                <p class="text-xs text-red-400 flex items-center gap-1">
+                                    <i class="fas fa-exclamation-circle"></i> {{ $message }}
+                                </p>
+                            @enderror
                         </div>
-                        {{-- Thumbnail Preview --}}
-                        <div id="thumbnailPreview" class="hidden mt-3">
-                            <div class="relative inline-block">
-                                <img id="thumbnailImg" src="" alt="Preview"
-                                    class="max-h-40 rounded-lg border border-gray-700 shadow-lg">
-                                <button type="button" onclick="clearThumbnail()"
-                                    class="absolute -top-2 -right-2 bg-red-500 hover:bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs transition">
-                                    <i class="fas fa-times"></i>
+
+                        {{-- GALLERY --}}
+                        <div class="space-y-2">
+                            <label class="text-xs text-gray-400">Project Gallery (Multiple)</label>
+                            <input type="file" name="gallery[]" id="galleryInput" multiple accept="image/*"
+                                class="w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:bg-gray-700 file:text-white hover:file:bg-gray-600 cursor-pointer transition"
+                                onchange="previewGallery(this)">
+                            <p class="text-xs text-gray-500">
+                                <i class="fas fa-info-circle mr-1"></i> Bisa pilih banyak foto sekaligus (Ctrl + Click)
+                            </p>
+                            {{-- Gallery Preview --}}
+                            <div id="galleryPreview" class="hidden mt-2">
+                                <div class="flex flex-wrap gap-2" id="galleryContainer"></div>
+                                <button type="button" onclick="clearGallery()"
+                                    class="mt-2 text-xs text-red-400 hover:text-red-300 transition">
+                                    <i class="fas fa-trash mr-1"></i> Hapus semua gambar
                                 </button>
                             </div>
+                            @error('gallery')
+                                <p class="text-xs text-red-400 flex items-center gap-1">
+                                    <i class="fas fa-exclamation-circle"></i> {{ $message }}
+                                </p>
+                            @enderror
+                            @error('gallery.*')
+                                <p class="text-xs text-red-400 flex items-center gap-1">
+                                    <i class="fas fa-exclamation-circle"></i> {{ $message }}
+                                </p>
+                            @enderror
                         </div>
-                        @error('image')
-                            <p class="text-xs text-red-400 flex items-center gap-1">
-                                <i class="fas fa-exclamation-circle"></i> {{ $message }}
-                            </p>
-                        @enderror
-                    </div>
-
-                    {{-- GALLERY --}}
-                    <div class="space-y-3">
-                        <label class="text-sm font-medium text-gray-300">Project Gallery (Multiple)</label>
-                        <input type="file" name="gallery[]" id="galleryInput" multiple accept="image/*"
-                            class="w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:bg-gray-800 file:text-white hover:file:bg-gray-700 cursor-pointer transition"
-                            onchange="previewGallery(this)">
-                        <p class="text-xs text-gray-500">
-                            <i class="fas fa-info-circle mr-1"></i> Bisa pilih banyak foto sekaligus (Ctrl + Click)
-                        </p>
-                        {{-- Gallery Preview --}}
-                        <div id="galleryPreview" class="hidden mt-3">
-                            <div class="flex flex-wrap gap-2" id="galleryContainer"></div>
-                            <button type="button" onclick="clearGallery()"
-                                class="mt-2 text-xs text-red-400 hover:text-red-300 transition">
-                                <i class="fas fa-trash mr-1"></i> Hapus semua gambar
-                            </button>
-                        </div>
-                        @error('gallery')
-                            <p class="text-xs text-red-400 flex items-center gap-1">
-                                <i class="fas fa-exclamation-circle"></i> {{ $message }}
-                            </p>
-                        @enderror
-                        @error('gallery.*')
-                            <p class="text-xs text-red-400 flex items-center gap-1">
-                                <i class="fas fa-exclamation-circle"></i> {{ $message }}
-                            </p>
-                        @enderror
                     </div>
                 </div>
 
