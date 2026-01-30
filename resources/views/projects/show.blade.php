@@ -12,7 +12,7 @@
             class="relative w-full h-[60vh] md:h-[80vh] rounded-[2rem] overflow-hidden mb-16 border border-gray-800 shadow-2xl group">
             @if ($project->image)
                 <img src="{{ asset('storage/' . $project->image) }}"
-                    class="w-full h-full object-cover group-hover:scale-105 transition duration-[1.5s] ease-out">
+                        class="w-full h-full object-cover group-hover:scale-105 transition duration-[1.5s] ease-out">
             @else
                 <div class="w-full h-full bg-gray-900 flex items-center justify-center">
                     <i class="fas fa-image text-8xl text-gray-800"></i>
@@ -275,9 +275,18 @@
         class="fixed bottom-8 inset-x-0 z-40 mx-auto w-max transition-transform duration-500 ease-in-out translate-y-[200%]">
 
         <div
-            class="flex items-center gap-2 bg-black/80 backdrop-blur-2xl border border-white/10 rounded-full p-2 shadow-2xl ring-1 ring-white/10 pl-6">
+            class="flex items-center gap-2 bg-black/80 backdrop-blur-2xl border border-white/10 rounded-full p-2 shadow-2xl ring-1 ring-white/10">
 
-            <span class="text-white font-bold text-sm mr-2 hidden sm:block">{{ Str::limit($project->title, 20) }}</span>
+            {{-- Back to All Projects Button --}}
+            <a href="{{ route('projects.index') }}"
+                class="flex items-center justify-center w-10 h-10 text-gray-300 hover:text-white hover:bg-white/10 rounded-full transition"
+                title="Back to All Projects">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+
+            <div class="w-px h-6 bg-white/20"></div>
+
+            <span class="text-white font-bold text-sm mx-2 hidden sm:block">{{ Str::limit($project->title, 20) }}</span>
 
             <div class="w-px h-6 bg-white/20 hidden sm:block"></div>
 
