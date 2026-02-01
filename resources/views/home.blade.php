@@ -362,14 +362,20 @@
                     atau kesempatan menjadi bagian dari visi Anda.</p>
 
                 <div class="flex flex-col md:flex-row justify-center gap-6">
-                    <a href="mailto:email@naoval.com"
+                    <a href="{{ route('contact') }}"
                         class="px-10 py-4 bg-primary text-white font-bold rounded-full hover:bg-orange-600 transition shadow-lg shadow-orange-500/25 flex items-center justify-center gap-3">
                         <i class="far fa-envelope"></i> Kirim Email
                     </a>
-                    <a href="#"
-                        class="px-10 py-4 bg-gray-800 text-white font-bold rounded-full hover:bg-gray-700 transition flex items-center justify-center gap-3 border border-gray-700">
+                    <button type="button" disabled
+                        class="px-10 py-4 bg-gray-800/50 text-gray-500 font-bold rounded-full cursor-not-allowed flex items-center justify-center gap-3 border border-gray-700/50 relative group"
+                        title="Fitur ini belum tersedia sementara">
                         <i class="fab fa-whatsapp"></i> Chat WhatsApp
-                    </a>
+                        {{-- Tooltip --}}
+                        <span
+                            class="absolute -top-12 left-1/2 -translate-x-1/2 px-3 py-2 bg-gray-900 text-gray-300 text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap border border-gray-700 pointer-events-none">
+                            🚧 Fitur ini belum tersedia
+                        </span>
+                    </button>
                 </div>
             </div>
         </div>

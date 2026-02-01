@@ -46,10 +46,12 @@
             <div class="flex items-center gap-4">
                 {{-- Social Icons (Opsional) --}}
                 <div class="hidden sm:flex items-center gap-3 pr-4 border-r border-gray-700">
-                    <a href="#" class="text-gray-400 hover:text-white transition"><i
+                    <a href="https://github.com/NaovalOcta" class="text-gray-400 hover:text-white transition"><i
                             class="fab fa-github"></i></a>
-                    <a href="#" class="text-gray-400 hover:text-white transition"><i
-                            class="fab fa-linkedin"></i></a>
+                    <a href="https://www.linkedin.com/in/naoval-ramadian-octaviansyah-3b6552314/"
+                        class="text-gray-400 hover:text-white transition"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://www.instagram.com/naopalism/?hl=en"
+                        class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
                 </div>
 
                 <a href="mailto:email@kamu.com"
@@ -73,9 +75,12 @@
             <p class="mb-6 max-w-lg mx-auto">Mahasiswa Informatika yang fokus pada pengembangan web dan aplikasi mobile.
             </p>
             <div class="flex justify-center space-x-6 mb-8">
-                <a href="#" class="text-2xl hover:text-primary"><i class="fab fa-github"></i></a>
-                <a href="#" class="text-2xl hover:text-primary"><i class="fab fa-linkedin"></i></a>
-                <a href="#" class="text-2xl hover:text-primary"><i class="fab fa-instagram"></i></a>
+                <a href="https://github.com/NaovalOcta" class="text-2xl hover:text-primary"><i
+                        class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/naoval-ramadian-octaviansyah-3b6552314/"
+                    class="text-2xl hover:text-primary"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.instagram.com/naopalism/?hl=en" class="text-2xl hover:text-primary"><i
+                        class="fab fa-instagram"></i></a>
             </div>
             <p class="text-sm text-gray-500">© {{ date('Y') }} Naoval. All Rights Reserved.</p>
         </div>
