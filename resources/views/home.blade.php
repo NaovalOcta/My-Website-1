@@ -367,12 +367,12 @@
                         <i class="far fa-envelope"></i> Kirim Email
                     </a>
                     <button type="button" disabled
-                        class="px-10 py-4 bg-gray-800/50 text-gray-500 font-bold rounded-full cursor-not-allowed flex items-center justify-center gap-3 border border-gray-700/50 relative group"
+                        class="px-10 py-4 bg-gray-800/50 text-gray-500 font-bold rounded-full cursor-not-allowed flex items-center justify-center gap-3 border border-gray-700/50 relative group/whatsapp"
                         title="Fitur ini belum tersedia sementara">
                         <i class="fab fa-whatsapp"></i> Chat WhatsApp
                         {{-- Tooltip --}}
                         <span
-                            class="absolute -top-12 left-1/2 -translate-x-1/2 px-3 py-2 bg-gray-900 text-gray-300 text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap border border-gray-700 pointer-events-none">
+                            class="absolute -top-12 left-1/2 -translate-x-1/2 px-3 py-2 bg-gray-900 text-gray-300 text-xs rounded-lg opacity-0 group-hover/whatsapp:opacity-100 transition-opacity whitespace-nowrap border border-gray-700 pointer-events-none">
                             🚧 Fitur ini belum tersedia
                         </span>
                     </button>

@@ -40,6 +40,10 @@
                     class="px-5 py-1.5 text-sm font-medium rounded-full transition-all duration-300 {{ request()->routeIs('projects.*') ? 'bg-primary text-white shadow-md' : 'text-gray-400 hover:text-white hover:bg-white/5' }}">
                     Works
                 </a>
+                <a href="{{ route('contact') }}"
+                    class="px-5 py-1.5 text-sm font-medium rounded-full transition-all duration-300 {{ request()->routeIs('contact') ? 'bg-primary text-white shadow-md' : 'text-gray-400 hover:text-white hover:bg-white/5' }}">
+                    Contact
+                </a>
             </div>
 
             {{-- 3. Call to Action / Contact --}}
@@ -54,7 +58,7 @@
                         class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
                 </div>
 
-                <a href="mailto:email@kamu.com"
+                <a href="{{ route('contact') }}"
                     class="group relative inline-flex items-center gap-2 px-5 py-2 bg-white text-black text-sm font-bold rounded-full hover:bg-gray-200 transition duration-300 overflow-hidden">
                     <span class="relative z-10">Let's Talk</span>
                     <i
