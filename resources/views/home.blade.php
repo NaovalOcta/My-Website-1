@@ -123,7 +123,7 @@
                             </div>
                             <div>
                                 <h4 class="text-white font-semibold">Pendidikan</h4>
-                                <p class="text-sm text-gray-500">S1 Informatika, Universitas X</p>
+                                <p class="text-sm text-gray-500">S1 Informatika, Universitas Muhammadiyah Malang</p>
                             </div>
                         </div>
 
@@ -134,7 +134,7 @@
                             </div>
                             <div>
                                 <h4 class="text-white font-semibold">Email</h4>
-                                <p class="text-sm text-gray-500">contact@naoval.dev</p>
+                                <p class="text-sm text-gray-500">nopal.r.octa@gmail.com</p>
                             </div>
                         </div>
 
@@ -145,7 +145,7 @@
                             </div>
                             <div>
                                 <h4 class="text-white font-semibold">Domisili</h4>
-                                <p class="text-sm text-gray-500">Surabaya, Indonesia</p>
+                                <p class="text-sm text-gray-500">Malang, Indonesia</p>
                             </div>
                         </div>
 
@@ -156,7 +156,7 @@
                             </div>
                             <div>
                                 <h4 class="text-white font-semibold">Minat Utama</h4>
-                                <p class="text-sm text-gray-500">Web & Mobile Dev</p>
+                                <p class="text-sm text-gray-500">Website Developer</p>
                             </div>
                         </div>
                     </div>
@@ -167,15 +167,15 @@
                             Download CV <i class="fas fa-download text-sm"></i>
                         </a>
                         <div class="flex gap-4 items-center px-4">
-                            <a href="#"
+                            <a href="https://github.com/NaovalOcta"
                                 class="w-10 h-10 rounded-full border border-gray-600 flex items-center justify-center text-gray-400 hover:text-white hover:border-primary hover:bg-primary transition duration-300">
                                 <i class="fab fa-github"></i>
                             </a>
-                            <a href="#"
+                            <a href="https://www.linkedin.com/in/naoval-ramadian-octaviansyah-3b6552314/"
                                 class="w-10 h-10 rounded-full border border-gray-600 flex items-center justify-center text-gray-400 hover:text-white hover:border-primary hover:bg-primary transition duration-300">
                                 <i class="fab fa-linkedin-in"></i>
                             </a>
-                            <a href="#"
+                            <a href="https://www.instagram.com/naopalism/?hl=en"
                                 class="w-10 h-10 rounded-full border border-gray-600 flex items-center justify-center text-gray-400 hover:text-white hover:border-primary hover:bg-primary transition duration-300">
                                 <i class="fab fa-instagram"></i>
                             </a>

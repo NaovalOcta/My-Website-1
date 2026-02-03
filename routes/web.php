@@ -18,7 +18,7 @@ Route::post('/contact', [ContactController::class, 'send'])->name('contact.send'
 // Middleware 'guest' artinya yang sudah login TIDAK BISA akses halaman ini (langsung dilempar ke dashboard)
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-    Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+    Route::post('/login', [AuthController::class, 'login'])->name('login.post')->middleware('throttle:login');
 });
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');

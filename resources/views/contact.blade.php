@@ -36,12 +36,12 @@
                 {{-- Left Side: Contact Info --}}
                 <div class="space-y-8">
                     {{-- Contact Cards --}}
-                    <div class="space-y-6">
+                    <div class="space-y-6 animate-fade-in-up" style="animation-delay: 0.6s;">
                         <h2 class="text-2xl font-bold text-white mb-8">Informasi Kontak</h2>
 
                         {{-- Email Card --}}
                         <a href="mailto:contact@naoval.dev"
-                            class="group flex items-start gap-5 p-6 bg-card-bg border border-gray-800 rounded-2xl hover:border-primary/50 transition duration-300">
+                            class="group flex items-start gap-5 p-6 bg-card-bg border border-gray-800 rounded-2xl hover:border-primary/50 hover:-translate-y-1 transition duration-300">
                             <div
                                 class="w-14 h-14 bg-primary/20 rounded-2xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition shrink-0">
                                 <i class="fas fa-envelope text-xl"></i>
@@ -53,22 +53,28 @@
                             </div>
                         </a>
 
-                        {{-- WhatsApp Card --}}
-                        <a href="https://wa.me/6281234567890" target="_blank"
-                            class="group flex items-start gap-5 p-6 bg-card-bg border border-gray-800 rounded-2xl hover:border-green-500/50 transition duration-300">
+                        {{-- WhatsApp Card (Disabled) --}}
+                        <div
+                            class="group/whatsapp relative flex items-start gap-5 p-6 bg-card-bg border border-gray-800 rounded-2xl cursor-not-allowed opacity-60">
                             <div
-                                class="w-14 h-14 bg-green-500/20 rounded-2xl flex items-center justify-center text-green-400 group-hover:bg-green-500 group-hover:text-white transition shrink-0">
+                                class="w-14 h-14 bg-green-500/20 rounded-2xl flex items-center justify-center text-green-400/50 shrink-0">
                                 <i class="fab fa-whatsapp text-2xl"></i>
                             </div>
                             <div>
-                                <h3 class="text-white font-semibold mb-1">WhatsApp</h3>
-                                <p class="text-gray-400 text-sm mb-2">Untuk respons yang lebih cepat</p>
-                                <span class="text-green-400 group-hover:underline">+62 812 3456 7890</span>
+                                <h3 class="text-gray-400 font-semibold mb-1">WhatsApp</h3>
+                                <p class="text-gray-500 text-sm mb-2">Untuk respons yang lebih cepat</p>
+                                <span class="text-gray-500">+62 xxx xxxx xxxx</span>
                             </div>
-                        </a>
+                            {{-- Tooltip --}}
+                            <span
+                                class="absolute -top-12 left-1/2 -translate-x-1/2 px-3 py-2 bg-gray-900 text-gray-300 text-xs rounded-lg opacity-0 group-hover/whatsapp:opacity-100 transition-opacity whitespace-nowrap border border-gray-700 pointer-events-none z-10">
+                                🚧 Belum dapat diakses sementara ini
+                            </span>
+                        </div>
 
                         {{-- Location Card --}}
-                        <div class="flex items-start gap-5 p-6 bg-card-bg border border-gray-800 rounded-2xl">
+                        <div
+                            class="flex items-start gap-5 p-6 bg-card-bg border border-gray-800 rounded-2xl hover:-translate-y-1 transition duration-300">
                             <div
                                 class="w-14 h-14 bg-blue-500/20 rounded-2xl flex items-center justify-center text-blue-400 shrink-0">
                                 <i class="fas fa-map-marker-alt text-xl"></i>
@@ -82,31 +88,27 @@
                     </div>
 
                     {{-- Social Media --}}
-                    <div class="pt-8 border-t border-gray-800">
+                    <div class="pt-8 border-t border-gray-800 animate-fade-in-up" style="animation-delay: 0.7s;">
                         <h3 class="text-lg font-semibold text-white mb-6">Connect with Me</h3>
                         <div class="flex gap-4">
-                            <a href="#"
+                            <a href="https://github.com/NaovalOcta"
                                 class="w-12 h-12 rounded-xl bg-gray-800 border border-gray-700 flex items-center justify-center text-gray-400 hover:text-white hover:border-primary hover:bg-primary transition duration-300">
                                 <i class="fab fa-github text-xl"></i>
                             </a>
-                            <a href="#"
+                            <a href="https://www.linkedin.com/in/naoval-ramadian-octaviansyah-3b6552314/"
                                 class="w-12 h-12 rounded-xl bg-gray-800 border border-gray-700 flex items-center justify-center text-gray-400 hover:text-white hover:border-blue-500 hover:bg-blue-500 transition duration-300">
                                 <i class="fab fa-linkedin-in text-xl"></i>
                             </a>
-                            <a href="#"
+                            <a href="https://www.instagram.com/naopalism/?hl=en"
                                 class="w-12 h-12 rounded-xl bg-gray-800 border border-gray-700 flex items-center justify-center text-gray-400 hover:text-white hover:border-pink-500 hover:bg-pink-500 transition duration-300">
                                 <i class="fab fa-instagram text-xl"></i>
-                            </a>
-                            <a href="#"
-                                class="w-12 h-12 rounded-xl bg-gray-800 border border-gray-700 flex items-center justify-center text-gray-400 hover:text-white hover:border-blue-400 hover:bg-blue-400 transition duration-300">
-                                <i class="fab fa-twitter text-xl"></i>
                             </a>
                         </div>
                     </div>
 
                     {{-- Availability Status --}}
-                    <div
-                        class="p-6 bg-gradient-to-br from-primary/10 to-purple-500/10 border border-primary/20 rounded-2xl">
+                    <div class="p-6 bg-gradient-to-br from-primary/10 to-purple-500/10 border border-primary/20 rounded-2xl animate-fade-in-up"
+                        style="animation-delay: 0.8s;">
                         <div class="flex items-center gap-3 mb-3">
                             <span class="relative flex h-3 w-3">
                                 <span
@@ -123,7 +125,8 @@
                 </div>
 
                 {{-- Right Side: Contact Form --}}
-                <div class="bg-card-bg border border-gray-800 rounded-3xl p-8 md:p-10">
+                <div class="bg-card-bg border border-gray-800 rounded-3xl p-8 md:p-10 animate-fade-in-up"
+                    style="animation-delay: 0.7s;">
                     <h2 class="text-2xl font-bold text-white mb-2">Kirim Pesan</h2>
                     <p class="text-gray-400 mb-8">Isi form di bawah dan saya akan segera merespons.</p>
 
@@ -220,12 +223,12 @@
     {{-- FAQ Section --}}
     <section class="py-20 px-6">
         <div class="container mx-auto max-w-4xl">
-            <div class="text-center mb-12">
+            <div class="text-center mb-12 animate-fade-in-up" style="animation-delay: 0.9s;">
                 <h2 class="text-3xl font-bold text-white mb-4">Pertanyaan <span class="text-primary">Umum</span></h2>
                 <p class="text-gray-400">Beberapa pertanyaan yang sering ditanyakan</p>
             </div>
 
-            <div class="space-y-4" id="faq-container">
+            <div class="space-y-4 animate-fade-in-up" id="faq-container" style="animation-delay: 1s;">
                 {{-- FAQ Item 1 --}}
                 <div class="bg-card-bg border border-gray-800 rounded-2xl overflow-hidden faq-item">
                     <button type="button"
