@@ -1,19 +1,22 @@
-# Render.com Configuration for Laravel
+# Render.com Configuration for Laravel (Docker)
 # Dokumentasi: https://render.com/docs/blueprint-spec
 
 services:
   - type: web
     name: naoval-dev
-    runtime: php
+    runtime: docker
     region: singapore
     plan: free
-    buildCommand: ./scripts/render-build.sh
-    startCommand: php artisan serve --host=0.0.0.0 --port=$PORT
+    dockerfilePath: ./Dockerfile
     envVars:
+      - key: APP_NAME
+        value: "Naoval Dev"
       - key: APP_ENV
         value: production
       - key: APP_DEBUG
-        value: false
+        value: "false"
+      - key: APP_URL
+        value: "https://naoval-dev.onrender.com"
       - key: DB_CONNECTION
         value: sqlite
       - key: SESSION_DRIVER
